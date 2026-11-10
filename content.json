@@ -1,0 +1,904 @@
+{
+ "version": 1,
+ "tx": {
+  "title": {
+   "en": "Reyhaneh Pirzadeh Moghadam",
+   "fa": "ریحانه پیرزاده مقدم"
+  },
+  "desc": {
+   "en": "Portfolio of Reyhaneh Pirzadeh Moghadam, sculptor and painter.",
+   "fa": "وب‌سایت نمونه‌کار ریحانه پیرزاده مقدم، مجسمه‌ساز و نقاش"
+  },
+  "brand": {
+   "en": "Reyhaneh Pirzadeh Moghadam",
+   "fa": "ریحانه پیرزاده مقدم"
+  },
+  "nav.works": {
+   "en": "Works",
+   "fa": "آثار"
+  },
+  "nav.cube": {
+   "en": "Inner Cube",
+   "fa": "مکعب درون"
+  },
+  "nav.about": {
+   "en": "About",
+   "fa": "درباره"
+  },
+  "nav.resume": {
+   "en": "Resume",
+   "fa": "رزومه"
+  },
+  "nav.contact": {
+   "en": "Contact",
+   "fa": "تماس"
+  },
+  "hero.role": {
+   "en": "Sculptor · Painter · Art teacher",
+   "fa": "مجسمه‌ساز · نقاش · مدرس هنر"
+  },
+  "hero.loc": {
+   "en": "Public works in Tehran, Tabriz, Isfahan and Mashhad",
+   "fa": "اجرای مجسمه شهری در تهران، تبریز، اصفهان و مشهد"
+  },
+  "hero.avail": {
+   "en": "Open to commissions",
+   "fa": "پذیرای سفارش اثر"
+  },
+  "hero.n1": {
+   "en": "Reyhaneh",
+   "fa": "ریحانه"
+  },
+  "hero.n2": {
+   "en": "Pirzadeh Moghadam",
+   "fa": "پیرزاده مقدم"
+  },
+  "hero.lead": {
+   "en": "Between aesthetics and lived experience, I build bridges. In iron, stone, bronze and fiberglass, I make volumes that become the voice of a space or the reflection of a memory.",
+   "fa": "میان زیبایی‌شناسی و تجربه زیسته پل می‌زنم. با آهن، سنگ، برنز و فایبرگلاس، حجمی می‌سازم که صدای فضا باشد یا بازتاب یک خاطره."
+  },
+  "hero.cta1": {
+   "en": "View works",
+   "fa": "مشاهده آثار"
+  },
+  "hero.cta2": {
+   "en": "Get in touch",
+   "fa": "تماس با من"
+  },
+  "hero.fig": {
+   "en": "In the studio",
+   "fa": "در استودیو"
+  },
+  "hero.scroll": {
+   "en": "Scroll",
+   "fa": "اسکرول"
+  },
+  "works.lbl": {
+   "en": "Portfolio 2012–2026",
+   "fa": "نمونه‌کارها ۱۳۹۱–۱۴۰۵"
+  },
+  "works.h": {
+   "en": "Selected works",
+   "fa": "منتخب آثار"
+  },
+  "works.sub": {
+   "en": "Public sculpture, portraits and figures. Select any work to see it large.",
+   "fa": "مجسمه‌های شهری، تندیس‌ها و آثار فیگوراتیو. روی هر اثر بزنید تا بزرگ ببینید."
+  },
+  "f.all": {
+   "en": "All",
+   "fa": "همه"
+  },
+  "pr.lbl": {
+   "en": "Practice",
+   "fa": "حوزه‌های کار"
+  },
+  "pr.h": {
+   "en": "Fields of practice",
+   "fa": "حوزه‌های کار"
+  },
+  "pr.cube.t": {
+   "en": "The Inner Cube",
+   "fa": "مکعب درون"
+  },
+  "pr.cube.d": {
+   "en": "Four bronze figures pressed against a cube, caught between reason and feeling.",
+   "fa": "چهار پیکر برنزی در برخورد با یک مکعب، میان عقل و احساس."
+  },
+  "pr.n": {
+   "en": "{n} works",
+   "fa": "{n} اثر"
+  },
+  "cube.lbl": {
+   "en": "Series",
+   "fa": "مجموعه"
+  },
+  "cube.h": {
+   "en": "The Inner Cube",
+   "fa": "مکعب درون"
+  },
+  "cube.p1": {
+   "en": "This series reflects an inner struggle that every person meets, sooner or later, along the course of life: a tension between reason, which draws borders and angles, and feeling, which rebels against every limit.",
+   "fa": "این مجموعه بازتاب جدالی درونی است که هر انسان، دیر یا زود، در مسیر زیست خود با آن مواجه می‌شود؛ کشاکشی میان عقل که مرز و زاویه می‌سازد، و احساس که سر باز می‌زند از هر محدودیتی."
+  },
+  "cube.p2": {
+   "en": "The figures in these works are half human, somewhere between life and death, between muscle and bone. They face a cube that is both alien and familiar; it carries the weight of reason and the tremor of doubt. A volume that seems fixed and rigid, yet changes on contact with the body and loses its own boundaries.",
+   "fa": "فیگورها در این آثار نیمه انسانی‌اند؛ در جایی میان زندگی و مرگ، میان ماهیچه و استخوان. آن‌ها با مکعبی مواجه‌اند که هم بیگانه است و هم آشنا؛ هم سنگینی خرد را در خود دارد و هم لرزش تردید. حجمی که به‌ظاهر ثابت و صُلب است اما در تماس با بدن دگرگون می‌شود و مرزهای خویش را از دست می‌دهد."
+  },
+  "cube.p3": {
+   "en": "In this encounter, bodies collapse and are built again: moments of tension and resistance, of surrender and fatigue. Each figure bears witness to how hard it is to balance reason and feeling, a balance with no final destination, formed only through trial and error and lived experience.",
+   "fa": "در این برخورد، تن‌ها فرو می‌ریزند و دوباره ساخته می‌شوند؛ لحظه‌هایی از کشش و مقاومت، از تسلیم و خستگی. هر فیگور گواهی است بر دشواری برقراری توازن میان عقل و احساس؛ توازنی که مقصدی قطعی ندارد و تنها در مسیر آزمون و خطا و تجربه‌ی زیسته شکل می‌گیرد."
+  },
+  "cube.p4": {
+   "en": "These sculptures tell of an endless search: the search of a human being who, between the rigidity of reason and the fluidity of feeling, is always changing.",
+   "fa": "این مجسمه‌ها روایتگر جست‌وجویی بی‌پایان‌اند؛ جست‌وجوی انسانی که میان صُلبیت عقل و سیالی احساس، مدام در حال دگرگونی است."
+  },
+  "cube.sig": {
+   "en": "Bronze on a stone base · Four works",
+   "fa": "برنز روی پایه سنگ · چهار اثر"
+  },
+  "cube.hint": {
+   "en": "Scroll or swipe through the series",
+   "fa": "برای دیدن مجموعه اسکرول یا سوایپ کنید"
+  },
+  "about.lbl": {
+   "en": "About",
+   "fa": "درباره من"
+  },
+  "about.s": {
+   "en": "I'm Reyhaneh Pirzadeh Moghadam, an artist and sculptor. I hold a bachelor's degree in sculpture and a master's in painting, and alongside my practice I work as an art teacher.",
+   "fa": "من، ریحانه پیرزاده مقدم، هنرمند و مجسمه‌ساز، فارغ‌التحصیل کارشناسی مجسمه‌سازی و کارشناسی ارشد نقاشی هستم و در کنار فعالیت‌های هنری، به عنوان مدرس هنر نیز مشغول به کارم."
+  },
+  "about.p2": {
+   "en": "My path in art began with graphic design, grew richer through painting, and found its focus in sculpture, where I could translate my view of space, material and form into a three-dimensional language.",
+   "fa": "مسیر من در هنر از گرافیک آغاز شد، با نقاشی غنی‌تر شد و در مجسمه‌سازی به نقطه تمرکز رسید؛ جایی که توانستم نگاه خود به فضا، ماده و فرم را به زبان سه‌بعدی ترجمه کنم."
+  },
+  "about.p3": {
+   "en": "Working with a wide range of materials, from iron and stone to bronze and fiberglass, has let me find a new way to express my ideas each time. For me a sculpture is never only an independent volume: sometimes it is the voice of a space, sometimes the reflection of a memory, and sometimes a wordless conversation with the viewer.",
+   "fa": "تجربه کار با متریال‌های متنوع، از آهن و سنگ تا برنز و فایبرگلاس، به من این امکان را داده که هر بار شیوه‌ای تازه برای بیان ایده‌هایم بیابم. برای من، مجسمه فقط یک حجم مستقل نیست؛ گاهی صدای فضاست، گاهی بازتابی از خاطره، و گاهی گفت‌وگویی بی‌کلام با مخاطب."
+  },
+  "about.p4": {
+   "en": "In my work I try to build a bridge between aesthetics and lived experience: to make pieces that, besides their visual value, offer a chance for connection, discovery and a shared experience between the work and its viewer.",
+   "fa": "در آثارم تلاش می‌کنم میان زیبایی‌شناسی و تجربه زیسته پلی بزنم؛ آثاری بیافرینم که علاوه بر ارزش بصری، فرصتی برای ارتباط، مکاشفه و تجربه مشترک میان اثر و بیننده فراهم کنند."
+  },
+  "about.pull": {
+   "en": "Sometimes the voice of a space, sometimes the reflection of a memory, and sometimes a wordless conversation with the viewer.",
+   "fa": "گاهی صدای فضا، گاهی بازتاب خاطره، و گاهی گفت‌وگویی بی‌کلام با مخاطب."
+  },
+  "about.fig": {
+   "en": "Reyhaneh Pirzadeh Moghadam",
+   "fa": "ریحانه پیرزاده مقدم"
+  },
+  "cv.lbl": {
+   "en": "Background",
+   "fa": "سوابق"
+  },
+  "cv.h": {
+   "en": "Resume",
+   "fa": "رزومه"
+  },
+  "ct.lbl": {
+   "en": "Contact",
+   "fa": "تماس"
+  },
+  "ct.h": {
+   "en": "Let's talk",
+   "fa": "بیایید گفت‌وگو کنیم"
+  },
+  "ct.lead": {
+   "en": "For commissions, collaborations or invitations to events, write to me through any of these.",
+   "fa": "برای سفارش اثر، همکاری یا دعوت به رویداد، از یکی از این راه‌ها پیام بدهید."
+  },
+  "ct.cta": {
+   "en": "Message on Telegram",
+   "fa": "پیام در تلگرام"
+  },
+  "ct.tg": {
+   "en": "Telegram",
+   "fa": "تلگرام"
+  },
+  "ct.ig": {
+   "en": "Instagram",
+   "fa": "اینستاگرام"
+  },
+  "ct.em": {
+   "en": "Email",
+   "fa": "ایمیل"
+  },
+  "ct.ph": {
+   "en": "Phone",
+   "fa": "تلفن"
+  },
+  "ct.copied": {
+   "en": "Copied",
+   "fa": "کپی شد"
+  },
+  "ct.sel": {
+   "en": "Text selected, copy it",
+   "fa": "متن انتخاب شد، کپی کنید"
+  },
+  "ft.c": {
+   "en": "© 2026 Reyhaneh Pirzadeh Moghadam. All rights to the works reserved.",
+   "fa": "© ۱۴۰۵ ریحانه پیرزاده مقدم. همه حقوق آثار محفوظ است."
+  },
+  "ft.top": {
+   "en": "Back to top ↑",
+   "fa": "بازگشت به بالا ↑"
+  },
+  "lb.year": {
+   "en": "Year",
+   "fa": "سال"
+  },
+  "lb.mat": {
+   "en": "Material",
+   "fa": "متریال"
+  },
+  "lb.dim": {
+   "en": "Dimensions",
+   "fa": "ابعاد"
+  },
+  "lb.place": {
+   "en": "Place",
+   "fa": "مکان"
+  },
+  "lb.cm": {
+   "en": "cm",
+   "fa": "سانتی‌متر"
+  },
+  "a.close": {
+   "en": "Close",
+   "fa": "بستن"
+  },
+  "a.prev": {
+   "en": "Previous work",
+   "fa": "اثر قبلی"
+  },
+  "a.next": {
+   "en": "Next work",
+   "fa": "اثر بعدی"
+  },
+  "a.lb": {
+   "en": "Enlarged view of the work",
+   "fa": "نمایش بزرگ اثر"
+  },
+  "a.menu": {
+   "en": "Menu",
+   "fa": "منو"
+  },
+  "a.nav": {
+   "en": "Main navigation",
+   "fa": "ناوبری اصلی"
+  },
+  "a.theme": {
+   "en": "Switch between light and dark theme",
+   "fa": "تغییر تم روشن و تاریک"
+  },
+  "a.lang": {
+   "en": "Language",
+   "fa": "زبان"
+  },
+  "a.filters": {
+   "en": "Filter works",
+   "fa": "فیلتر آثار"
+  },
+  "a.copyem": {
+   "en": "Copy email address",
+   "fa": "کپی آدرس ایمیل"
+  },
+  "a.copyph": {
+   "en": "Copy phone number",
+   "fa": "کپی شماره تلفن"
+  },
+  "a.opentg": {
+   "en": "Open Telegram",
+   "fa": "باز کردن تلگرام"
+  },
+  "a.openig": {
+   "en": "Open Instagram",
+   "fa": "باز کردن اینستاگرام"
+  },
+  "a.alt.studio": {
+   "en": "Reyhaneh Pirzadeh Moghadam at work on a sculpture under a lamp",
+   "fa": "ریحانه پیرزاده مقدم در حال کار روی یک مجسمه زیر نور چراغ"
+  },
+  "a.alt.smile": {
+   "en": "Portrait of Reyhaneh Pirzadeh Moghadam in a red scarf",
+   "fa": "پرتره ریحانه پیرزاده مقدم با روسری قرمز"
+  },
+  "a.view": {
+   "en": "View work: {t}",
+   "fa": "مشاهده اثر {t}"
+  },
+  "a.sculpt": {
+   "en": "Sculpture: ",
+   "fa": "مجسمه "
+  },
+  "pr.n1": {
+   "en": "{n} work",
+   "fa": "{n} اثر"
+  }
+ },
+ "cats": [
+  {
+   "id": "city",
+   "name": {
+    "en": "Urban sculpture",
+    "fa": "مجسمه شهری"
+   },
+   "desc": {
+    "en": "Large-scale permanent works for squares, parks and avenues, built in iron, travertine and fiberglass.",
+    "fa": "آثار دائمی در مقیاس شهری برای میدان‌ها، پارک‌ها و خیابان‌ها، از آهن، سنگ تراورتن و فایبرگلاس."
+   }
+  },
+  {
+   "id": "portrait",
+   "name": {
+    "en": "Portrait & bust",
+    "fa": "تندیس و سردیس"
+   },
+   "desc": {
+    "en": "Busts and portrait sculptures of musicians, statesmen and national figures, made in fiberglass.",
+    "fa": "سردیس و تندیس چهره‌های موسیقی، سیاست و تاریخ معاصر، در فایبرگلاس."
+   }
+  },
+  {
+   "id": "figure",
+   "name": {
+    "en": "Figure & architecture",
+    "fa": "پیکر و معماری"
+   },
+   "desc": {
+    "en": "Small figurative studies and architectural forms, where a character and a building meet.",
+    "fa": "مطالعه‌های کوچک فیگوراتیو و فرم‌های معماری، جایی که شخصیت و بنا به هم می‌رسند."
+   }
+  }
+ ],
+ "works": [
+  {
+   "id": "amoo-norouz",
+   "cat": "city",
+   "title": {
+    "en": "Amu Nowruz & Nane Sarma",
+    "fa": "عمو نوروز و ننه سرما"
+   },
+   "year": 1403,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "100 × 250 × 250",
+   "place": {
+    "en": "Kish Island",
+    "fa": "کیش"
+   },
+   "img": "amoo-norouz",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoOAA4ABABoJbACdIExDN/YAAD9+U3QPBseJ9mAXG9RXV6wj9HXEGz5S/FBXo16cuIyS3AVUAAAAA==",
+   "avg": "#8f9073"
+  },
+  {
+   "id": "homayoun-shajarian",
+   "cat": "portrait",
+   "title": {
+    "en": "Homayoun Shajarian",
+    "fa": "همایون شجریان"
+   },
+   "year": 1405,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "70 × 35 × 35",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "homayoun-shajarian",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoOAA4ABABoJZwAAh/EOxi5IAAA/vQvkTOr/dgMgNG/0C618uV4TEsPc8+KY4RBAAlacoVIKqE99FY7utMfp3oQAAA=",
+   "avg": "#383430"
+  },
+  {
+   "id": "tajassom-noor",
+   "cat": "city",
+   "title": {
+    "en": "Embodiment of Light",
+    "fa": "تجسم نور"
+   },
+   "year": 1395,
+   "mat": {
+    "en": "Travertine stone",
+    "fa": "سنگ تراورتن"
+   },
+   "dims": "300 × 120 × 120",
+   "place": {
+    "en": "El Goli Park, Tabriz",
+    "fa": "پارک ائل‌گلی تبریز"
+   },
+   "img": "tajassom-noor",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoOAA4ABABoJYwC7AELz/HixYEYAP7v7qIx2eOe02liJM4MvMIKBozCXk3NvrNooXPAbksiMnJlsjXhZFIotAAA",
+   "avg": "#c9c3b7"
+  },
+  {
+   "id": "asghar",
+   "cat": "figure",
+   "title": {
+    "en": "Asghar",
+    "fa": "اصغر"
+   },
+   "year": 0,
+   "mat": {
+    "en": "Polyester",
+    "fa": "پلی‌استر"
+   },
+   "dims": "24 × 20 × 14",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "asghar",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoOAA4ABABoJZQCdADMIZffNgAA/sTkUE8oYBuFWUmR7Y76flhQeQCPcchdtiyoclJp56TZXRX0f6uH5UpAeuX0wfhTNOW7QBR4AA==",
+   "avg": "#7c766b"
+  },
+  {
+   "id": "nostalgia-parvaz",
+   "cat": "city",
+   "title": {
+    "en": "Nostalgia of Flight",
+    "fa": "نوستالوژی پرواز"
+   },
+   "year": 1402,
+   "mat": {
+    "en": "Iron",
+    "fa": "آهن"
+   },
+   "dims": "450 × 400 × 250",
+   "place": {
+    "en": "Tabriz Airport Square",
+    "fa": "میدان فرودگاه تبریز"
+   },
+   "img": "nostalgia-parvaz",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoOAA4ABABoJQAAXa/h9vDFvL4oAP7zfn3HhDdBM/syr4n55NmlRaV3Dqpg05XctxP45fsKUQeu8FPpwKB0SBkS+Wv0NF5eAAA=",
+   "avg": "#b4d0ce"
+  },
+  {
+   "id": "mehmani-madarbozorg",
+   "cat": "city",
+   "title": {
+    "en": "Grandmother's Party",
+    "fa": "مهمانی مادربزرگ"
+   },
+   "year": 1403,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "250 × 300 × 300",
+   "place": {
+    "en": "Tehran",
+    "fa": "تهران"
+   },
+   "img": "mehmani-madarbozorg",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAABwAQCdASoOAA4ABABoJaACdACrAAD+7gl5jWJg8nGPV4RFBukMYWJSoH9pkntBr1HTxcT3nn4q3yNgpOGTPkAA",
+   "avg": "#b4a088"
+  },
+  {
+   "id": "ghaem-magham",
+   "cat": "portrait",
+   "title": {
+    "en": "Ghaem-Maqam Farahani",
+    "fa": "قائم‌مقام فراهانی"
+   },
+   "year": 1398,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "12 × 10 × 30",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "ghaem-magham",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoOAA4ABABoJQBOgCKqFrFcAAD+sUhf3cgpscmbh5x3ShwLh6HxFKHzXIeDFT44h8n6OqJAAAA=",
+   "avg": "#b5a48f"
+  },
+  {
+   "id": "shahid-gomnam",
+   "cat": "city",
+   "title": {
+    "en": "The Unknown Martyr",
+    "fa": "شهید گمنام"
+   },
+   "year": 1391,
+   "mat": {
+    "en": "Iron",
+    "fa": "آهن"
+   },
+   "dims": "300 × 100 × 100",
+   "place": {
+    "en": "Shohada Square, Isfahan",
+    "fa": "میدان شهدای اصفهان"
+   },
+   "img": "shahid-gomnam",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAACwAQCdASoOAA4ABABoJQBOgBuZjGAAAP7nVmY1gc+os+xeWbWsWfdp0PaCCc52rnatFgmUXdawvQbRfaRCCEz5AAA=",
+   "avg": "#d2bea9"
+  },
+  {
+   "id": "dar-jostejoo",
+   "cat": "city",
+   "title": {
+    "en": "In Search Of",
+    "fa": "درجستجوی"
+   },
+   "year": 1394,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "300 × 80 × 100",
+   "place": {
+    "en": "Vali-Asr Street, Tehran (permanent)",
+    "fa": "خیابان ولیعصر تهران (المان دائم)"
+   },
+   "img": "dar-jostejoo",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoOAA4ABABoJQBOgBK22YhhgAD+2CFqTz109muIR/SRop4zqrc6XTGPCRUDjs9mxTAIc5Gn771fpN97C8Egim7vhXly2c1vXcSb6Apy5vBx2WegAAA=",
+   "avg": "#bdad90"
+  },
+  {
+   "id": "hassan-habibi",
+   "cat": "portrait",
+   "title": {
+    "en": "Hassan Habibi",
+    "fa": "حسن حبیبی"
+   },
+   "year": 1399,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "30 × 30 × 70",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "hassan-habibi",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoOAA4ABABoJYwCdADG8qJkAAD+TxrcB3u0v+ahGbna1UZxO9o/meMwJ4B1dmof/CLohRxDDim2vSJhFQZAlGOaxmtpu9AA",
+   "avg": "#695e50"
+  },
+  {
+   "id": "untitled-inverted",
+   "cat": "figure",
+   "title": {
+    "en": "Untitled",
+    "fa": "بدون عنوان"
+   },
+   "year": 0,
+   "mat": {
+    "en": "",
+    "fa": ""
+   },
+   "dims": "",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "untitled-inverted",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACwAQCdASoOAA4ABABoJZQCw7By8LoAAP7D+Ao99PdHOjlk/lUPuuXnleUsXsjjW00vA/xgAa9u65bdEUW0i9IoIVMA7gAA",
+   "avg": "#7c756b"
+  },
+  {
+   "id": "nostalgia",
+   "cat": "city",
+   "title": {
+    "en": "Nostalgia",
+    "fa": "نوستالوژی"
+   },
+   "year": 1404,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "100 × 300 × 250",
+   "place": {
+    "en": "Tehran",
+    "fa": "تهران"
+   },
+   "img": "nostalgia",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoOAA4ABABoJbACdAC8QtBMtoAAAP7v1yoBSEZfKJyMxz9/ZSCiyH4UEA05h+hajhxqJrMD5L+9Zj0+wnYAAA==",
+   "avg": "#c8b396"
+  },
+  {
+   "id": "chamran",
+   "cat": "portrait",
+   "title": {
+    "en": "Martyr Mostafa Chamran",
+    "fa": "شهید مصطفی چمران"
+   },
+   "year": 1400,
+   "mat": {
+    "en": "Fiberglass",
+    "fa": "فایبرگلاس"
+   },
+   "dims": "25 × 30 × 60",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "chamran",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACQAQCdASoOAA4ABABoJZACdADZCAAA/sKFsBrfRdPE3K9eoBw9w+F4n9W5OHHeNa7vi98hHyamBuxhFeUa/yVrStrvozlpeAA=",
+   "avg": "#66533c"
+  },
+  {
+   "id": "dasti-ke-nemiresad",
+   "cat": "cube",
+   "title": {
+    "en": "The Hand That Cannot Reach Afar",
+    "fa": "دستی که به دوردست نمی‌رسد"
+   },
+   "year": 0,
+   "mat": {
+    "en": "Bronze",
+    "fa": "برنز"
+   },
+   "dims": "6 × 20 × 35",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "dasti-ke-nemiresad",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACwAQCdASoOAA4ABABoJZQAAeBMk0YAAOJ5ZWEHEgbxZODqkTncxfKzXP+up2cPH1fuKIZ/aOJrQ1ACEAA=",
+   "avg": "#4b4842"
+  },
+  {
+   "id": "band-namarei",
+   "cat": "cube",
+   "title": {
+    "en": "The Invisible Bond",
+    "fa": "بند نامرئی"
+   },
+   "year": 0,
+   "mat": {
+    "en": "Bronze",
+    "fa": "برنز"
+   },
+   "dims": "6 × 20 × 35",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "band-namarei",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoOAA4ABABoJYwCdAELX0ghhWEAAM45SVPH2cewW56GMcnPHaULVB6HNi53Z8UUMAZsJAgAAAA=",
+   "avg": "#4c453b"
+  },
+  {
+   "id": "amniyat-mavhoom",
+   "cat": "cube",
+   "title": {
+    "en": "Illusory Security",
+    "fa": "امنیت موهوم"
+   },
+   "year": 0,
+   "mat": {
+    "en": "Bronze",
+    "fa": "برنز"
+   },
+   "dims": "10 × 6 × 25",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "amniyat-mavhoom",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoOAA4ABABoJYwCdAEeXTsE3fQAAPulezZbN41GdwNfmwUCl4DB/iXUnjoldON5BPUK7ax9ZY85Z84WKfbw14AA",
+   "avg": "#4a433b"
+  },
+  {
+   "id": "panah-bi-panah",
+   "cat": "cube",
+   "title": {
+    "en": "Shelter of the Shelterless",
+    "fa": "پناه بی‌پناه"
+   },
+   "year": 0,
+   "mat": {
+    "en": "Bronze",
+    "fa": "برنز"
+   },
+   "dims": "10 × 6 × 25",
+   "place": {
+    "en": "",
+    "fa": ""
+   },
+   "img": "panah-bi-panah",
+   "ext": "webp",
+   "lq": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoOAA4ABABoJZQCdADFai3hkq/gAPliJpkYx7YyW7zd+yMJXpGeO9Si0Nk1ko4jEu1AfvSF4AA=",
+   "avg": "#4e4840"
+  }
+ ],
+ "stats": [
+  {
+   "kind": "works",
+   "label": {
+    "en": "Works in this portfolio",
+    "fa": "اثر در این نمایه"
+   }
+  },
+  {
+   "kind": "count",
+   "n": 5,
+   "label": {
+    "en": "Materials: iron, stone, bronze, fiberglass, polyester",
+    "fa": "متریال: آهن، سنگ، برنز، فایبرگلاس، پلی‌استر"
+   }
+  },
+  {
+   "kind": "count",
+   "n": 4,
+   "label": {
+    "en": "Sculpture symposiums",
+    "fa": "سمپوزیوم مجسمه‌سازی"
+   }
+  },
+  {
+   "kind": "text",
+   "text": {
+    "en": "2012–2026",
+    "fa": "۱۳۹۱–۱۴۰۵"
+   },
+   "label": {
+    "en": "Years covered",
+    "fa": "بازه آثار"
+   }
+  }
+ ],
+ "resume": [
+  {
+   "title": {
+    "en": "Education & art",
+    "fa": "تحصیلی و هنری"
+   },
+   "items": [
+    {
+     "year": 1388,
+     "en": "Bachelor's degree in Sculpture, University of Neyshabur",
+     "fa": "کارشناسی رشته مجسمه‌سازی از دانشگاه نیشابور"
+    },
+    {
+     "year": 1395,
+     "en": "Master's degree in Painting, Soore University",
+     "fa": "کارشناسی ارشد رشته نقاشی از دانشگاه سوره"
+    },
+    {
+     "year": 0,
+     "en": "Instructor of sculpture and painting at private art institutes",
+     "fa": "مدرس آموزشگاه‌های آزاد مجسمه‌سازی و نقاشی"
+    }
+   ]
+  },
+  {
+   "title": {
+    "en": "Practical record",
+    "fa": "سوابق عملی"
+   },
+   "items": [
+    {
+     "year": 0,
+     "en": "Member of the Iranian Sculptors' Association",
+     "fa": "عضو انجمن مجسمه‌سازان ایران"
+    },
+    {
+     "year": 1398,
+     "en": "School art teacher, from this year",
+     "fa": "دبیر هنر مدارس، از این سال"
+    },
+    {
+     "year": 1399,
+     "en": "Secretary of the sculpture event commemorating the 17,000 women martyrs, disabled veterans and freed prisoners (Women's Affairs Office, Tehran Municipality)",
+     "fa": "دبیر رویداد مجسمه‌سازی یادبود هفده هزار زن شهید جانباز و آزاده (اداره کل امور بانوان شهرداری تهران)"
+    },
+    {
+     "year": 0,
+     "en": "Member of the works selection board for the same event",
+     "fa": "عضو هیئت انتخاب آثار در رویداد مجسمه‌سازی یادبود هفده هزار زن شهید جانباز و آزاده"
+    },
+    {
+     "year": 0,
+     "en": "Secretary of the event “The Future Looks Like You”, Women's Affairs Office, Tehran Municipality",
+     "fa": "دبیر رویداد «آینده شبیه توست»، اداره کل امور بانوان شهرداری تهران"
+    }
+   ]
+  },
+  {
+   "title": {
+    "en": "Symposiums & exhibitions",
+    "fa": "سمپوزیوم و نمایشگاه"
+   },
+   "items": [
+    {
+     "year": 1392,
+     "en": "Main section of the Isfahan Iron Symposium; won second place",
+     "fa": "شرکت در بخش اصلی سمپوزیوم آهن اصفهان و کسب مقام دوم"
+    },
+    {
+     "year": 1393,
+     "en": "Took part in the Urban Sculpture Biennial; the work was installed on Vali-Asr Street, Tehran",
+     "fa": "شرکت در دوسالانه مجسمه‌های شهری و اجرای شهری اثر (نصب در خیابان ولیعصر)"
+    },
+    {
+     "year": 1395,
+     "en": "Tabriz International Sculpture Symposium; designer and maker of the work",
+     "fa": "سمپوزیوم مجسمه‌سازی بین‌المللی تبریز، طراح و مجری اثر"
+    },
+    {
+     "year": 1395,
+     "en": "6th Tehran International Stone Sculpture Symposium; assistant",
+     "fa": "ششمین سمپوزیوم بین‌المللی سنگ مجسمه‌سازی تهران، دستیار"
+    },
+    {
+     "year": 1401,
+     "en": "Tabriz Iron Symposium; made and installed the work at Tabriz Airport",
+     "fa": "سمپوزیوم آهن تبریز، اجرای اثر و نصب در فرودگاه تبریز"
+    },
+    {
+     "sub": true,
+     "en": "Exhibitions & commissions",
+     "fa": "نمایشگاه‌ها و اجراها"
+    },
+    {
+     "year": 0,
+     "en": "Several group exhibitions, “Four Corners of Imagination”",
+     "fa": "چندین نمایشگاه گروهی «چهار سوی خیال»"
+    },
+    {
+     "year": 0,
+     "en": "Several group sculpture exhibitions at Ayeh Gallery, Milad Tower Gallery and others",
+     "fa": "چندین نمایشگاه گروهی مجسمه در گالری آیه، گالری برج میلاد و …"
+    },
+    {
+     "year": 0,
+     "en": "Executed several urban sculptures in Mashhad, Tehran, Isfahan and Tabriz",
+     "fa": "اجرای چندین مجسمه شهری در مشهد، تهران، اصفهان و تبریز"
+    }
+   ]
+  }
+ ],
+ "contact": {
+  "telegram": "Reyhaneh_pm",
+  "instagram": "reyhaneh.pirzadehmoqadam",
+  "email": "pm.reyhaneh@gmail.com",
+  "phone": "09374397741",
+  "phoneDisplay": "0937 439 7741"
+ },
+ "portraits": {
+  "studio": {
+   "img": "portrait-studio",
+   "ext": "webp",
+   "w": 1000,
+   "h": 1333,
+   "lq": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoMABAABABoJZgCsADzwkABcAD+6k4mQlAHbGxH4GHJ9pDO/Kjxrcwm4AZMavYht1NOS3J/saGkkAAA",
+   "avg": "#492f3c"
+  },
+  "smile": {
+   "img": "portrait-smile",
+   "ext": "webp",
+   "w": 1000,
+   "h": 1161,
+   "lq": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoMABAABABoJbACdADbRUgkjjLAAP5AAPeiUIT1WS94ZOcKRInvzw502RYPeDme1UnG20wGm0FeeSLQQtsCxloAbzzfe3mEq/CQR9JO04mgKvPjwhQbwuQ2f+gAAA==",
+   "avg": "#725043"
+  }
+ }
+}
