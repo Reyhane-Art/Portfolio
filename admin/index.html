@@ -288,20 +288,35 @@ class TrErr extends Error{constructor(code,msg){super(msg);this.code=code}}
 function trErr(e){
   if(!(e instanceof TrErr))return 'خطا در ترجمه: '+(e&&e.message||e);
   const c=e.code,m=e.message||'';
-  if(c==='net')return 'اتصال به سرویس ترجمه برقرار نشد. فیلترشکن را روشن کنید و دوباره امتحان کنید.';
-  if(c===401||c===403||/api key|api_key|permission|location|region/i.test(m)&&c!==429)return 'کلید ترجمه نامعتبر است یا اجازهٔ استفاده ندارد (شاید منطقهٔ شما پشتیبانی نمی‌شود؛ فیلترشکن را امتحان کنید).';
+  if(c==='net')return 'اتصال به سرویس ترجمه برقرار نشد ('+m+'). فیلترشکن را روشن کنید و دوباره امتحان کنید.';
+  if(c==='timeout')return 'سرویس ترجمه تا '+m+' ثانیه پاسخ نداد. معمولاً یعنی فیلترشکن اجازهٔ رسیدن به سرور آن را نمی‌دهد: سرور یا کشور فیلترشکن را عوض کنید، یا آن را روی حالت «کل سیستم» بگذارید (نه فقط مرورگر) و دوباره امتحان کنید.';
+  if(c===401||c===403||/api key|api_key|permission|location|region/i.test(m)&&c!==429)return 'کلید ترجمه نامعتبر است یا اجازهٔ استفاده ندارد (شاید منطقهٔ شما پشتیبانی نمی‌شود؛ فیلترشکن را امتحان کنید).'+(m?' ['+m.slice(0,120)+']':'');
   if(c===429)return 'سقف استفادهٔ این کلید موقتاً پر شده. چند دقیقه بعد دوباره امتحان کنید.';
   if(c===404)return 'مدل ترجمه پیدا نشد. نام مدل را در تب «ترجمهٔ خودکار» بررسی کنید.';
   if(c==='format')return 'پاسخ سرویس ترجمه قابل‌خواندن نبود. دوباره امتحان کنید.';
   return 'خطای سرویس ترجمه ('+c+'): '+m;
 }
+/* every request has a time limit, so a stalled connection can never leave the panel waiting forever */
 async function trFetch(url,opt){
-  let r;try{r=await fetch(url,opt)}catch(e){throw new TrErr('net','network')}
-  if(!r.ok){let m='';try{const j=await r.json();m=(j.error&&(j.error.message||j.error))||j.message||''}catch(e){}throw new TrErr(r.status,String(m).slice(0,300))}
-  return r.json();
+  const ov=window.__TR__||{},post=!!(opt&&opt.method==='POST'),ms=post?(ov.postMs||90000):(ov.getMs||20000);
+  const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),ms);
+  try{
+    let r;try{r=await fetch(url,Object.assign({},opt,{signal:ac.signal}))}
+    catch(e){throw ac.signal.aborted?new TrErr('timeout',String(Math.round(ms/1000))):new TrErr('net',String(e&&e.message||e))}
+    if(!r.ok){let m='';try{const j=await r.json();m=(j.error&&(j.error.message||j.error))||j.message||''}catch(e){}throw new TrErr(r.status,String(m).slice(0,300))}
+    try{return await r.json()}catch(e){throw ac.signal.aborted?new TrErr('timeout',String(Math.round(ms/1000))):new TrErr('format','json')}
+  }finally{clearTimeout(timer)}
+}
+/* can the browser reach the server at all? (opaque request: only tells reachable / not reachable) */
+async function trReach(url){
+  const ov=window.__TR__||{},ms=ov.reachMs||12000,ac=new AbortController(),timer=setTimeout(()=>ac.abort(),ms);
+  try{await fetch(url,{mode:'no-cors',cache:'no-store',signal:ac.signal})}
+  catch(e){throw ac.signal.aborted?new TrErr('timeout',String(Math.round(ms/1000))):new TrErr('net',String(e&&e.message||e))}
+  finally{clearTimeout(timer)}
 }
 const verCmp=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d}return 0};
 let GEM_MODEL=null;
+const gemBase=()=>(window.__TR__||{}).gemini||'https://generativelanguage.googleapis.com/v1beta';
 async function geminiModel(base){ // newest stable "flash" model that supports generateContent
   if(TRC.model)return TRC.model;if(GEM_MODEL)return GEM_MODEL;
   try{
@@ -309,13 +324,13 @@ async function geminiModel(base){ // newest stable "flash" model that supports g
     (j.models||[]).forEach(m=>{const x=/^models\/gemini-(\d+(?:\.\d+)*)-flash$/.exec(m.name||'');
       if(x&&(m.supportedGenerationMethods||[]).includes('generateContent')&&verCmp(x[1],bv)>0){bv=x[1];best=m.name.slice(7)}});
     GEM_MODEL=best||'gemini-flash-latest';
-  }catch(e){if(e.code==='net'||e.code===400||e.code===401||e.code===403)throw e;GEM_MODEL='gemini-flash-latest'}
+  }catch(e){if(e.code==='net'||e.code==='timeout'||e.code===400||e.code===401||e.code===403)throw e;GEM_MODEL='gemini-flash-latest'}
   return GEM_MODEL;
 }
 async function llm(system,user){
   const c=TRC,ov=window.__TR__||{};
   if(c.provider==='gemini'){
-    const base=ov.gemini||'https://generativelanguage.googleapis.com/v1beta',model=await geminiModel(base);
+    const base=gemBase(),model=await geminiModel(base);
     const j=await trFetch(`${base}/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':c.key},
       body:JSON.stringify({system_instruction:{parts:[{text:system}]},contents:[{role:'user',parts:[{text:user}]}],generationConfig:{responseMimeType:'application/json'}})});
     const t=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(p=>p.text||'').join('');if(!t)throw new TrErr('format','empty');return {text:t,model};
@@ -689,12 +704,23 @@ function tabTr(){
   const out=h('div',{class:'log',hidden:true});
   const test=h('button',{class:'btn',type:'button',onclick:async()=>{
     if(!c.key){toast('اول کلید را وارد کنید.',true);return}
-    test.disabled=true;out.hidden=false;out.replaceChildren(h('div',{},'در حال آزمایش…'));
+    test.disabled=true;out.hidden=false;out.replaceChildren();
+    const step=async(txt,fn)=>{ // one visible line per step, with a running timer
+      const mark=h('span',{style:'min-width:2.6rem;display:inline-block'},'…'),d=h('div',{style:'margin:.2rem 0'},mark,' ',txt),t0=Date.now();out.append(d);
+      const tick=setInterval(()=>{mark.textContent=Math.round((Date.now()-t0)/1000)+'s'},1000);
+      try{const r=await fn();mark.textContent='✓';d.append(h('span',{class:'hint'},' ('+((Date.now()-t0)/1000).toFixed(1)+' ثانیه)'));return r}
+      catch(e){mark.textContent='✗';out.append(h('div',{class:'e',style:'margin:.3rem 0 .6rem'},trErr(e)));throw e}
+      finally{clearInterval(tick)}
+    };
     try{
-      const a=await trOne({text:'مجسمه‌ای از آهن و سنگ که از خاطرهٔ کودکی‌ام الهام گرفته است.',from:'fa',to:'en',kind:'paragraph of website copy',obj:{}});
-      const b=await trOne({text:'Between aesthetics and lived experience, I build bridges.',from:'en',to:'fa',kind:'paragraph of website copy',obj:{}});
-      out.replaceChildren(h('div',{},'فارسی ← انگلیسی:'),h('div',{class:'en',style:'margin:.2rem 0 .8rem'},a),h('div',{},'انگلیسی ← فارسی:'),h('div',{style:'margin:.2rem 0'},b),h('div',{class:'o'},'ترجمه کار می‌کند ✓'+(GEM_MODEL&&c.provider==='gemini'&&!c.model?' (مدل: '+GEM_MODEL+')':'')));
-    }catch(e){out.replaceChildren(h('div',{class:'e'},trErr(e)))}
+      const host=c.provider==='gemini'?new URL(gemBase()).origin:c.provider==='anthropic'?((window.__TR__||{}).anthropic||'https://api.anthropic.com'):new URL(c.base||'https://x.invalid').origin;
+      await step('رسیدن به سرور سرویس ترجمه',()=>trReach(host+'/'));
+      if(c.provider==='gemini')await step('بررسی کلید و پیدا کردن مدل',()=>geminiModel(gemBase()));
+      await step('یک ترجمهٔ خیلی کوتاه',()=>llm('Translate the Persian to English. Return ONLY JSON {"items":[{"id":"1","text":"…"}]}.',JSON.stringify({from:'Persian',to:'English',items:[{id:'1',text:'سلام'}]})));
+      const a=await step('ترجمهٔ کامل فارسی ← انگلیسی',()=>trOne({text:'مجسمه‌ای از آهن و سنگ که از خاطرهٔ کودکی‌ام الهام گرفته است.',from:'fa',to:'en',kind:'paragraph of website copy',obj:{}}));
+      const b=await step('ترجمهٔ کامل انگلیسی ← فارسی',()=>trOne({text:'Between aesthetics and lived experience, I build bridges.',from:'en',to:'fa',kind:'paragraph of website copy',obj:{}}));
+      out.append(h('div',{style:'margin-top:.8rem'},'فارسی ← انگلیسی:'),h('div',{class:'en',style:'margin:.2rem 0 .8rem'},a),h('div',{},'انگلیسی ← فارسی:'),h('div',{style:'margin:.2rem 0'},b),h('div',{class:'o'},'ترجمه کار می‌کند ✓'+(GEM_MODEL&&c.provider==='gemini'&&!c.model?' (مدل: '+GEM_MODEL+')':'')));
+    }catch(e){}
     test.disabled=false;
   }},'آزمایش ترجمه');
   root.append(h('h2',{},'ترجمهٔ خودکار'),h('p',{class:'lead'},'با این قابلیت فقط یک زبان را می‌نویسید (فارسی یا انگلیسی). زبان دیگر را هوش مصنوعی ترجمه می‌کند و شما فقط آن را می‌خوانید و اگر لازم بود اصلاح می‌کنید. ترجمه‌های بررسی‌نشده با رنگ برنز و برچسب مشخص می‌شوند.'));
