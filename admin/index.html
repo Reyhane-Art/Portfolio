@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>پنل مدیریت | ریحانه پیرزاده مقدم</title>
+<style>
+@font-face{font-family:Doran;font-weight:400;src:url(../fonts/doran-regular.woff) format('woff');font-display:swap}
+@font-face{font-family:Doran;font-weight:700;src:url(../fonts/doran-bold.woff) format('woff');font-display:swap}
+@font-face{font-family:Doran;font-weight:900;src:url(../fonts/doran-xblack.woff) format('woff');font-display:swap}
+:root{--bg:#EEEEEB;--card:#F8F8F6;--ink:#0C0C0C;--mute:#6A6963;--line:#D8D7D1;--bronze:#94602E;--ok:#2F7D4F;--err:#B3372B;--acc:#0C0C0C;--onacc:#EEEEEB;--sh:0 12px 40px rgba(0,0,0,.14)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141311;--card:#1D1B18;--ink:#EEEEEB;--mute:#A09E96;--line:#34322D;--bronze:#C58A4A;--ok:#58B27C;--err:#E0705F;--acc:#EEEEEB;--onacc:#141311;--sh:0 12px 40px rgba(0,0,0,.5)}}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.7 Doran,Tahoma,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:.8rem;padding:.7rem max(16px,env(safe-area-inset-right)) .7rem max(16px,env(safe-area-inset-left));background:var(--bg);border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:1.05rem;font-weight:900;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top h1 small{font-weight:400;color:var(--mute);margin-inline-start:.6rem}
+.dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:var(--ok);margin-inline-end:.4rem}
+.dot.d{background:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:2.4rem;padding:.35rem 1.1rem;border:1px solid var(--ink);border-radius:2rem;background:transparent;font-weight:700;white-space:nowrap;transition:background .2s,color .2s,opacity .2s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.pri{background:var(--acc);color:var(--onacc)}.btn.pri:hover{opacity:.85}
+.btn.sm{min-height:2rem;padding:.15rem .8rem;font-size:.9rem}
+.btn.danger{border-color:var(--err);color:var(--err)}.btn.danger:hover{background:var(--err);color:#fff}
+.btn:disabled{opacity:.45;pointer-events:none}
+.shell{display:grid;grid-template-columns:13.5rem minmax(0,1fr);gap:0;max-width:78rem;margin:0 auto}
+.side{position:sticky;top:3.6rem;align-self:start;display:flex;flex-direction:column;gap:.2rem;padding:1.2rem max(16px,env(safe-area-inset-right)) 1.2rem .6rem}
+.side button{display:flex;align-items:center;gap:.6rem;text-align:start;border:0;background:transparent;padding:.55rem .9rem;border-radius:.7rem;font-weight:700;color:var(--mute)}
+.side button:hover{color:var(--ink)}
+.side button[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.side b{margin-inline-start:auto;font-size:.78rem;opacity:.75}
+main{min-width:0;padding:1.4rem max(16px,env(safe-area-inset-left)) 6rem 1rem}
+h2{margin:0 0 .3rem;font-size:1.5rem;font-weight:900}
+.lead{margin:0 0 1.4rem;color:var(--mute);max-width:60ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.1rem 1.2rem;margin-bottom:1rem}
+details.card>summary{cursor:pointer;font-weight:900;font-size:1.05rem;list-style:none;display:flex;align-items:center;gap:.6rem}
+details.card>summary::before{content:"";width:.55rem;height:.55rem;border-inline-end:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .25s;margin-top:-.2rem}
+details.card[open]>summary::before{transform:rotate(-135deg);margin-top:.2rem}
+details.card>summary::-webkit-details-marker{display:none}
+details.card[open]>summary{margin-bottom:1rem}
+.fld{margin-bottom:1.1rem}
+.fld>label,.lbl{display:block;font-weight:700;font-size:.92rem;margin-bottom:.3rem}
+.fld .hint,.hint{color:var(--mute);font-size:.84rem;margin:.2rem 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+@media(max-width:720px){.two,.three{grid-template-columns:1fr}}
+.in{width:100%;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.7rem;background:var(--bg);min-height:2.5rem;transition:border-color .2s,box-shadow .2s}
+.in:focus{outline:0;border-color:var(--bronze);box-shadow:0 0 0 3px color-mix(in srgb,var(--bronze) 25%,transparent)}
+textarea.in{resize:vertical;min-height:4.5rem;line-height:1.75}
+.en{direction:ltr;text-align:left;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.95rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;color:var(--mute);margin-bottom:.15rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(12.5rem,1fr));gap:1rem}
+.wc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:1rem;overflow:hidden;display:flex;flex-direction:column}
+.wc img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--line);cursor:pointer}
+.wc .meta{padding:.6rem .8rem .2rem;min-width:0}
+.wc .t{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wc .s{font-size:.82rem;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wc .act{display:flex;gap:.3rem;padding:.5rem .6rem .7rem;margin-top:auto}
+.ic{width:2.1rem;height:2.1rem;border:1px solid var(--line);border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:1rem;line-height:1;padding:0}
+.ic:hover{border-color:var(--ink)}
+.ic:disabled{opacity:.3;pointer-events:none}
+.badge{position:absolute;top:.5rem;inset-inline-start:.5rem;background:var(--ink);color:var(--bg);border-radius:2rem;padding:.05rem .65rem;font-size:.74rem;font-weight:700}
+.badge.new{inset-inline-start:auto;inset-inline-end:.5rem;background:var(--bronze);color:#fff}
+.bar{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1.2rem}
+.bar .grow{flex:1}
+.row{display:flex;gap:.6rem;align-items:flex-start}
+.row>.in:first-child{flex:none}
+.cvr{display:grid;grid-template-columns:5.5rem 1fr 1fr auto;gap:.5rem;align-items:start;padding:.6rem 0;border-top:1px dashed var(--line)}
+.cvr.sub{background:color-mix(in srgb,var(--bronze) 10%,transparent);border-radius:.6rem;padding-inline:.5rem}
+.cvr .acts{display:flex;gap:.25rem}
+@media(max-width:720px){.cvr{grid-template-columns:1fr 1fr}.cvr .y{grid-column:1/-1}.cvr .acts{grid-column:1/-1}}
+.modal{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.55);display:flex;align-items:flex-start;justify-content:center;padding:max(1rem,4vh) 1rem;overflow:auto}
+.sheet{width:min(46rem,100%);background:var(--bg);border-radius:1.2rem;box-shadow:var(--sh);padding:1.3rem 1.4rem 1.2rem}
+.sheet h3{margin:0 0 1rem;font-size:1.25rem;font-weight:900}
+.sheet .foot{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--line)}
+.sheet .foot .grow{flex:1}
+.crop{display:flex;gap:1.2rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:1.2rem}
+.crop .cw{flex:none;width:min(100%,20rem)}
+.crop canvas{width:100%;aspect-ratio:1;border-radius:.8rem;background:var(--line);touch-action:none;cursor:grab}
+.crop canvas.big{aspect-ratio:auto}
+.crop .ctl{flex:1;min-width:12rem}
+.crop img.cur{width:100%;aspect-ratio:1;object-fit:cover;border-radius:.8rem}
+input[type=range]{width:100%;accent-color:var(--bronze)}
+.pv{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;flex-direction:column}
+.pv .pb{display:flex;gap:.6rem;align-items:center;padding:.6rem 1rem;border-bottom:1px solid var(--line)}
+.pv .pb .grow{flex:1}
+.pv .fw{flex:1;min-height:0;display:flex;justify-content:center;background:color-mix(in srgb,var(--ink) 8%,var(--bg))}
+.pv iframe{border:0;width:100%;height:100%;background:#fff;transition:width .3s}
+.pv.m iframe{width:390px;max-width:100%;box-shadow:var(--sh)}
+.toast{position:fixed;inset-inline:0;bottom:1.2rem;z-index:90;display:flex;justify-content:center;pointer-events:none}
+.toast span{background:var(--ink);color:var(--bg);padding:.6rem 1.3rem;border-radius:2rem;font-weight:700;box-shadow:var(--sh);animation:up .3s}
+.toast span.err{background:var(--err);color:#fff}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}
+.log{margin:1rem 0 0;padding:.9rem 1rem;border-radius:.8rem;background:var(--card);border:1px solid var(--line);font-size:.9rem;max-height:16rem;overflow:auto;white-space:pre-wrap;direction:rtl}
+.log .e{color:var(--err);font-weight:700}.log .o{color:var(--ok);font-weight:700}
+ul.chg{margin:.3rem 0 0;padding-inline-start:1.2rem}
+.note{padding:.8rem 1rem;border-radius:.8rem;background:color-mix(in srgb,var(--bronze) 12%,transparent);border:1px solid color-mix(in srgb,var(--bronze) 40%,transparent);font-size:.92rem;margin-bottom:1rem}
+.steps{margin:.2rem 0 0;padding-inline-start:1.3rem}.steps li{margin-bottom:.4rem}
+code,.code{direction:ltr;unicode-bidi:embed;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86em;background:var(--line);padding:.05rem .4rem;border-radius:.35rem}
+@media(max-width:560px){.top #status{font-size:0}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.wc .act{flex-wrap:wrap}.wc .act .btn{flex:1 0 100%}}
+@media(max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .side{position:sticky;top:3.6rem;z-index:20;flex-direction:row;overflow-x:auto;gap:.3rem;padding:.6rem max(16px,env(safe-area-inset-right)) .6rem max(16px,env(safe-area-inset-left));background:var(--bg);border-bottom:1px solid var(--line);scrollbar-width:none}
+  .side button{white-space:nowrap;flex:none}
+  main{padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right))}
+  .top h1 small{display:none}
+}
+
+.in.auto{background:color-mix(in srgb,var(--bronze) 11%,var(--bg));border-color:var(--bronze);border-style:dashed}
+.in[readonly]{opacity:.6}
+.trn{display:flex;flex-wrap:wrap;gap:.2rem .9rem;align-items:center;margin-top:.4rem;font-size:.84rem;color:var(--bronze)}
+.cvr .trn{grid-column:1/-1;margin-top:0}
+.lnk{background:none;border:0;padding:0;color:var(--ink);font-weight:700;text-decoration:underline;font-size:inherit}
+</style>
+</head>
+<body>
+<div id="app"><p style="text-align:center;margin-top:20vh">در حال بارگذاری…</p></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+/* ================= helpers ================= */
+const $=(s,r=document)=>r.querySelector(s);
+function h(tag,attrs,...kids){
+  const e=document.createElement(tag);attrs=attrs||{};
+  for(const k in attrs){const v=attrs[k];if(v==null||v===false||k==='value')continue;
+    if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?'':v)}
+  for(const kid of kids.flat(Infinity)){if(kid==null||kid===false)continue;e.append(kid.nodeType?kid:document.createTextNode(String(kid)))}
+  if('value' in attrs&&attrs.value!=null)e.value=attrs.value;
+  return e;
+}
+const FA='۰۱۲۳۴۵۶۷۸۹',AR='٠١٢٣٤٥٦٧٨٩';
+const digits=s=>String(s).replace(/[۰-۹]/g,d=>FA.indexOf(d)).replace(/[٠-٩]/g,d=>AR.indexOf(d));
+const faNum=n=>String(n).replace(/\d/g,d=>FA[d]);
+const clone=o=>JSON.parse(JSON.stringify(o));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function slugify(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40)}
+function rid(){return Math.random().toString(36).slice(2,6)}
+function toast(msg,err){const t=$('#toast');t.replaceChildren(h('span',{class:err?'err':''},msg));clearTimeout(toast.t);toast.t=setTimeout(()=>t.replaceChildren(),err?5200:2600)}
+function modal(build){
+  const ov=h('div',{class:'modal',role:'dialog','aria-modal':'true'});
+  const close=()=>{ov.remove();document.body.style.overflow=''};
+  ov.append(build(close));document.body.append(ov);document.body.style.overflow='hidden';
+  ov.addEventListener('mousedown',e=>{if(e.target===ov&&ov._dismiss)close()});
+  return {ov,close};
+}
+function ask(title,text,buttons){ // returns promise of clicked key
+  return new Promise(res=>{
+    modal(close=>h('div',{class:'sheet',style:'max-width:30rem'},h('h3',{},title),typeof text==='string'?h('p',{style:'margin:0'},text):text,
+      h('div',{class:'foot'},h('span',{class:'grow'}),buttons.map(b=>h('button',{class:'btn '+(b.cls||''),type:'button',onclick:()=>{close();res(b.key)}},b.label)))));
+  });
+}
+
+/* ================= state ================= */
+const st={c:null,base:'',baseSha:null,pend:{},prev:{},tab:'home',cfg:loadCfg(),log:[],busy:false,wf:'all'};
+const ser=()=>JSON.stringify(st.c);
+const dirty=()=>ser()!==st.base||Object.keys(st.pend).length>0;
+function loadCfg(){try{return Object.assign({owner:'',repo:'',branch:'main',token:'',remember:false},JSON.parse(localStorage.getItem('rpm-admin-cfg')||'{}'))}catch(e){return {owner:'',repo:'',branch:'main',token:'',remember:false}}}
+function saveCfg(){try{if(st.cfg.remember)localStorage.setItem('rpm-admin-cfg',JSON.stringify(st.cfg));else localStorage.removeItem('rpm-admin-cfg')}catch(e){}}
+const catName=id=>id==='cube'?(st.c.tx['pr.cube.t'].fa||st.c.tx['pr.cube.t'].en):((st.c.cats.find(k=>k.id===id)||{name:{fa:'—',en:''}}).name.fa||'—');
+function imgSrc(base,ext,size){const p=st.pend[base]||st.prev[base];if(p)return p.urls[size]||Object.values(p.urls)[0];return `../img/${base}-${size}.${ext||'webp'}`}
+function imgMap(){const m={};for(const src of [st.prev,st.pend])for(const b in src)for(const s in src[b].urls)m[b+'-'+s]=src[b].urls[s];return m}
+function usedFiles(c){ // every image file path referenced by a content object
+  const out=new Set();
+  const add=(base,ext,sizes)=>{if(base)sizes.forEach(s=>out.add(`img/${base}-${s}.${ext||'webp'}`))};
+  (c.works||[]).forEach(w=>add(w.img,w.ext,[560,960,1600]));
+  for(const k in (c.portraits||{}))add(c.portraits[k].img,c.portraits[k].ext,[640,1000]);
+  return out;
+}
+
+/* ================= drafts (IndexedDB) ================= */
+const DB={
+  open(){return new Promise((res,rej)=>{const r=indexedDB.open('rpm-admin',1);r.onupgradeneeded=()=>r.result.createObjectStore('d');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})},
+  async tx(mode,fn){const db=await this.open();return new Promise((res,rej)=>{const t=db.transaction('d',mode),s=t.objectStore('d'),r=fn(s);t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error)})},
+  get(){return this.tx('readonly',s=>s.get('draft')).catch(()=>null)},
+  put(v){return this.tx('readwrite',s=>s.put(v,'draft')).catch(()=>{})},
+  del(){return this.tx('readwrite',s=>s.delete('draft')).catch(()=>{})}
+};
+let draftT=0;
+function saveDraftSoon(){clearTimeout(draftT);draftT=setTimeout(async()=>{
+  if(!st.c)return;
+  if(!dirty()){await DB.del();return}
+  const pend={};for(const b in st.pend)pend[b]={ext:st.pend[b].ext,files:st.pend[b].files};
+  await DB.put({c:st.c,base:st.base,pend,t:Date.now()});
+},700)}
+function mkUrls(files){const u={};for(const s in files)u[s]=URL.createObjectURL(files[s]);return u}
+
+/* ================= images ================= */
+async function decodeFile(file){
+  try{return await createImageBitmap(file,{imageOrientation:'from-image'})}
+  catch(e){return await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('bad image'));i.src=URL.createObjectURL(file)})}
+}
+const dimsOf=b=>[b.width||b.naturalWidth,b.height||b.naturalHeight];
+function cv(w,hh){const c=document.createElement('canvas');c.width=w;c.height=hh;return c}
+function resize(src,sx,sy,sw,sh,dw,dh){ // stepwise halving for clean downscale
+  let cur=src,cx=sx,cy=sy,cw=sw,ch=sh;
+  while(cw/2>=dw*1.0001&&ch/2>=dh){
+    const n=cv(Math.max(1,Math.round(cw/2)),Math.max(1,Math.round(ch/2)));const g=n.getContext('2d');g.imageSmoothingQuality='high';
+    g.drawImage(cur,cx,cy,cw,ch,0,0,n.width,n.height);cur=n;cx=cy=0;cw=n.width;ch=n.height;
+  }
+  const o=cv(dw,dh),g=o.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(cur,cx,cy,cw,ch,0,0,dw,dh);return o;
+}
+async function enc(canvas,q){
+  let b=await new Promise(r=>canvas.toBlob(r,'image/webp',q));
+  if(b&&b.type==='image/webp')return {blob:b,ext:'webp'};
+  b=await new Promise(r=>canvas.toBlob(r,'image/jpeg',Math.min(.92,q+.1)));return {blob:b,ext:'jpg'};
+}
+async function tiny(src,sx,sy,sw,sh,w,hh){ // lqip + average colour
+  const c=resize(src,sx,sy,sw,sh,w,hh);
+  const a=resize(src,sx,sy,sw,sh,8,8).getContext('2d').getImageData(0,0,8,8).data;let r=0,g=0,b=0;
+  for(let i=0;i<a.length;i+=4){r+=a[i];g+=a[i+1];b+=a[i+2]}const n=a.length/4;
+  const e=await enc(c,.3),url=await new Promise(res=>{const f=new FileReader();f.onload=()=>res(f.result);f.readAsDataURL(e.blob)});
+  return {lq:url,avg:'#'+[r,g,b].map(v=>Math.round(v/n).toString(16).padStart(2,'0')).join('')};
+}
+async function processSquare(bmp,crop){ // crop={cx,cy,side} in source px
+  const sizes=[[560,.76],[960,.78],[1600,.8]],files={};let ext='webp';
+  for(const [s,q] of sizes){
+    const d=Math.min(s,Math.floor(crop.side));
+    const e=await enc(resize(bmp,crop.cx-crop.side/2,crop.cy-crop.side/2,crop.side,crop.side,d,d),q);files[s]=e.blob;ext=e.ext;
+  }
+  const t=await tiny(bmp,crop.cx-crop.side/2,crop.cy-crop.side/2,crop.side,crop.side,14,14);
+  return {pend:{ext,files,urls:mkUrls(files)},ext,lq:t.lq,avg:t.avg};
+}
+async function processPortrait(bmp){
+  const [W,H]=dimsOf(bmp),files={};let ext='webp';
+  for(const [s,q] of [[640,.78],[1000,.8]]){
+    const dw=Math.min(s,W),dh=Math.round(H*dw/W);
+    const e=await enc(resize(bmp,0,0,W,H,dw,dh),q);files[s]=e.blob;ext=e.ext;
+  }
+  const t=await tiny(bmp,0,0,W,H,12,Math.max(2,Math.round(12*H/W)));
+  const w=Math.min(1000,W);
+  return {pend:{ext,files,urls:mkUrls(files)},ext,lq:t.lq,avg:t.avg,w,h:Math.round(H*w/W)};
+}
+
+/* ================= zip (store, no compression) ================= */
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC[(c^u8[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+async function makeZip(files){ // files:[{name,blob|text}]
+  const enc=new TextEncoder(),parts=[],cen=[];let off=0;
+  const d=new Date(),dt=((d.getFullYear()-1980)<<9|(d.getMonth()+1)<<5|d.getDate()),tm=(d.getHours()<<11|d.getMinutes()<<5|d.getSeconds()>>1);
+  for(const f of files){
+    const data=f.blob?new Uint8Array(await f.blob.arrayBuffer()):enc.encode(f.text),name=enc.encode(f.name),crc=crc32(data);
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(8,0,true);lh.setUint16(10,tm,true);lh.setUint16(12,dt,true);
+    lh.setUint32(14,crc,true);lh.setUint32(18,data.length,true);lh.setUint32(22,data.length,true);lh.setUint16(26,name.length,true);lh.setUint16(28,0,true);
+    parts.push(lh.buffer,name,data);
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);ch.setUint16(10,0,true);ch.setUint16(12,tm,true);ch.setUint16(14,dt,true);
+    ch.setUint32(16,crc,true);ch.setUint32(20,data.length,true);ch.setUint32(24,data.length,true);ch.setUint16(28,name.length,true);ch.setUint32(42,off,true);
+    cen.push(ch.buffer,name);off+=30+name.length+data.length;
+  }
+  const csz=cen.reduce((a,b)=>a+(b.byteLength!==undefined?b.byteLength:b.length),0);
+  const end=new DataView(new ArrayBuffer(22));end.setUint32(0,0x06054b50,true);end.setUint16(8,files.length,true);end.setUint16(10,files.length,true);end.setUint32(12,csz,true);end.setUint32(16,off,true);
+  return new Blob([...parts,...cen,end.buffer],{type:'application/zip'});
+}
+
+/* ================= GitHub API ================= */
+const API=window.__API__||'https://api.github.com';
+class GhErr extends Error{constructor(s,m){super(m);this.status=s}}
+async function gh(path,opt={}){
+  let r;
+  try{r=await fetch(API+path,{method:opt.method||'GET',cache:'no-store',headers:Object.assign({Authorization:'Bearer '+st.cfg.token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},opt.body?{'Content-Type':'application/json'}:{}),body:opt.body?JSON.stringify(opt.body):undefined})}
+  catch(e){throw new GhErr(0,'network')}
+  if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){}throw new GhErr(r.status,m)}
+  return r.status===204?null:r.json();
+}
+function ghMsg(e){
+  if(!(e instanceof GhErr))return 'خطا: '+(e&&e.message||e);
+  const m={0:'اتصال به گیت‌هاب برقرار نشد. اینترنت یا فیلترشکن را بررسی کنید و دوباره تلاش کنید.',401:'توکن نامعتبر است یا منقضی شده. یک توکن جدید بسازید.',
+    403:'توکن اجازهٔ نوشتن ندارد (در ساخت توکن، Contents باید روی «Read and write» باشد) یا گیت‌هاب موقتاً درخواست‌ها را محدود کرده است.',
+    404:'مخزن یا شاخه پیدا نشد؛ نام کاربری و نام مخزن را بررسی کنید و مطمئن شوید توکن به همین مخزن دسترسی دارد.',409:'همزمان تغییری روی سایت ثبت شده. چند لحظه بعد دوباره امتحان کنید.',422:'گیت‌هاب این درخواست را نپذیرفت: '+e.message};
+  return m[e.status]||('خطای گیت‌هاب ('+e.status+'): '+e.message);
+}
+const b64utf8=s=>{const b=new TextEncoder().encode(s);let x='';b.forEach(c=>x+=String.fromCharCode(c));return btoa(x)};
+const unb64utf8=s=>{const x=atob(s.replace(/\s/g,'')),u=new Uint8Array(x.length);for(let i=0;i<x.length;i++)u[i]=x.charCodeAt(i);return new TextDecoder().decode(u)};
+const blobB64=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result.split(',')[1]);f.readAsDataURL(b)});
+
+/* ================= automatic translation (Persian <-> English) ================= */
+const TR_KEY='rpm-admin-tr';
+const TRC=(()=>{const d={on:true,provider:'gemini',key:'',model:'',base:'',remember:false};try{return Object.assign(d,JSON.parse(localStorage.getItem(TR_KEY)||'{}'))}catch(e){return d}})();
+function saveTR(){try{if(TRC.remember)localStorage.setItem(TR_KEY,JSON.stringify(TRC));else localStorage.removeItem(TR_KEY)}catch(e){}}
+const trReady=()=>!!(TRC.on&&TRC.key&&(TRC.provider!=='openai'||(TRC.base&&TRC.model)));
+class TrErr extends Error{constructor(code,msg){super(msg);this.code=code}}
+function trErr(e){
+  if(!(e instanceof TrErr))return 'خطا در ترجمه: '+(e&&e.message||e);
+  const c=e.code,m=e.message||'';
+  if(c==='net')return 'اتصال به سرویس ترجمه برقرار نشد. فیلترشکن را روشن کنید و دوباره امتحان کنید.';
+  if(c===401||c===403||/api key|api_key|permission|location|region/i.test(m)&&c!==429)return 'کلید ترجمه نامعتبر است یا اجازهٔ استفاده ندارد (شاید منطقهٔ شما پشتیبانی نمی‌شود؛ فیلترشکن را امتحان کنید).';
+  if(c===429)return 'سقف استفادهٔ این کلید موقتاً پر شده. چند دقیقه بعد دوباره امتحان کنید.';
+  if(c===404)return 'مدل ترجمه پیدا نشد. نام مدل را در تب «ترجمهٔ خودکار» بررسی کنید.';
+  if(c==='format')return 'پاسخ سرویس ترجمه قابل‌خواندن نبود. دوباره امتحان کنید.';
+  return 'خطای سرویس ترجمه ('+c+'): '+m;
+}
+async function trFetch(url,opt){
+  let r;try{r=await fetch(url,opt)}catch(e){throw new TrErr('net','network')}
+  if(!r.ok){let m='';try{const j=await r.json();m=(j.error&&(j.error.message||j.error))||j.message||''}catch(e){}throw new TrErr(r.status,String(m).slice(0,300))}
+  return r.json();
+}
+const verCmp=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d}return 0};
+let GEM_MODEL=null;
+async function geminiModel(base){ // newest stable "flash" model that supports generateContent
+  if(TRC.model)return TRC.model;if(GEM_MODEL)return GEM_MODEL;
+  try{
+    const j=await trFetch(base+'/models?pageSize=200',{headers:{'x-goog-api-key':TRC.key}});let best=null,bv='0';
+    (j.models||[]).forEach(m=>{const x=/^models\/gemini-(\d+(?:\.\d+)*)-flash$/.exec(m.name||'');
+      if(x&&(m.supportedGenerationMethods||[]).includes('generateContent')&&verCmp(x[1],bv)>0){bv=x[1];best=m.name.slice(7)}});
+    GEM_MODEL=best||'gemini-flash-latest';
+  }catch(e){if(e.code==='net'||e.code===400||e.code===401||e.code===403)throw e;GEM_MODEL='gemini-flash-latest'}
+  return GEM_MODEL;
+}
+async function llm(system,user){
+  const c=TRC,ov=window.__TR__||{};
+  if(c.provider==='gemini'){
+    const base=ov.gemini||'https://generativelanguage.googleapis.com/v1beta',model=await geminiModel(base);
+    const j=await trFetch(`${base}/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':c.key},
+      body:JSON.stringify({system_instruction:{parts:[{text:system}]},contents:[{role:'user',parts:[{text:user}]}],generationConfig:{responseMimeType:'application/json'}})});
+    const t=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(p=>p.text||'').join('');if(!t)throw new TrErr('format','empty');return {text:t,model};
+  }
+  if(c.provider==='anthropic'){
+    const base=ov.anthropic||'https://api.anthropic.com',model=c.model||'claude-sonnet-5-5';
+    const j=await trFetch(base+'/v1/messages',{method:'POST',headers:{'x-api-key':c.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true','content-type':'application/json'},
+      body:JSON.stringify({model,max_tokens:4096,system,messages:[{role:'user',content:user}]})});
+    const t=(j.content||[]).map(p=>p.text||'').join('');if(!t)throw new TrErr('format','empty');return {text:t,model};
+  }
+  const base=(c.base||'').replace(/\/+$/,''),model=c.model;
+  const j=await trFetch(base+'/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+c.key,'Content-Type':'application/json'},
+    body:JSON.stringify({model,messages:[{role:'system',content:system},{role:'user',content:user}]})});
+  const t=(((j.choices||[])[0]||{}).message||{}).content||'';if(!t)throw new TrErr('format','empty');return {text:t,model};
+}
+
+/* ---- prompt ---- */
+const TR_GLOSSARY='مجسمه=sculpture; مجسمه‌سازی=sculpture (the discipline); نقش‌برجسته=relief; تندیس=statue; مجسمه شهری=public (urban) sculpture; پیکرتراشی=figurative sculpture; ریخته‌گری=casting; قالب‌گیری=moulding; فایبرگلاس=fiberglass; برنز=bronze; آهن=iron; فولاد=steel; سنگ=stone; گچ=plaster; رزین=resin; خاک رس=clay; متریال=material; سمپوزیوم مجسمه‌سازی=sculpture symposium; نمایشگاه انفرادی=solo exhibition; نمایشگاه گروهی=group exhibition; کارشناسی=B.A.; کارشناسی ارشد=M.A.; مدرس=instructor; کارگاه=workshop; استودیو=studio';
+const TR_SYSTEM=`You are a senior Persian⇄English translator and editor who specialises in contemporary art, sculpture and gallery/portfolio writing. You translate text for the personal portfolio website of the Iranian sculptor and painter Reyhaneh Pirzadeh Moghadam (ریحانه پیرزاده مقدم).
+
+Rules:
+- Translate faithfully and completely. Never add, omit, explain or comment. Keep the meaning, register and voice (first person stays first person).
+- Write the way an excellent native writer would: natural, polished, idiomatic. Avoid word-for-word calques, but never change the meaning.
+- Persian output: standard modern Persian orthography; correct half-spaces (ZWNJ) in words such as «می‌کنم», «خانه‌ها», «نقش‌برجسته»; Persian punctuation (، ؛ ؟ « »); Persian digits (۰-۹); always ی and ک (never Arabic ي ك).
+- English output: fluent, precise art writing in American spelling; Western digits.
+- Proper names (people, cities, institutions): use the conventional spelling in the target language (e.g. تبریز → Tabriz, Mashhad → مشهد).
+- Artwork titles: short and poetic; translate the meaning, transliterate proper names; Title Case in English.
+- Keep placeholders such as {n} and {t}, line breaks, numbers, years (never convert calendars), URLs and @handles exactly as they are.
+- If an item is already entirely in the target language, return it unchanged.
+- "reference_pairs" are verified translations written by the site owner for the same kinds of text. Follow their terminology and style for consistency; do not copy them into the output.
+- Glossary (Persian=English): ${TR_GLOSSARY}.
+
+Return ONLY valid JSON: {"items":[{"id":"…","text":"…"}]} with exactly one entry per input item, using the same ids.`;
+
+/* ---- examples from the artist's own, already-reviewed content ---- */
+function exampleBank(skip){
+  const c=st.c,b={'artwork title':[],'artwork material':[],'location':[],'category name':[],'category description':[],'CV entry':[],'copy':[]};
+  const add=(k,o)=>{if(o&&!skip.has(o)&&o.en&&o.fa&&!o._t&&o.en.length<420&&o.fa.length<420)b[k].push({persian:o.fa,english:o.en})};
+  c.works.forEach(w=>{add('artwork title',w.title);add('artwork material',w.mat);add('location',w.place)});
+  c.cats.forEach(k=>{add('category name',k.name);add('category description',k.desc)});
+  c.resume.forEach(col=>col.items.forEach(it=>{if(!it.sub)add('CV entry',it)}));
+  Object.keys(c.tx).forEach(k=>add('copy',c.tx[k]));
+  return b;
+}
+function refsFor(kinds,skip){
+  const bank=exampleBank(skip),out={};
+  kinds.forEach(k=>{
+    let pool=bank[k];
+    if(!pool){const long=/paragraph/.test(k);pool=bank.copy.filter(p=>long?p.english.length>60:p.english.length<=60)}
+    const seen=new Set(),pick=[];for(const p of pool){if(!seen.has(p.english)){seen.add(p.english);pick.push(p);if(pick.length>=(/paragraph/.test(k)?3:8))break}}
+    if(pick.length)out[k]=pick;
+  });
+  return out;
+}
+function trClean(t,to,src){
+  t=String(t).trim();
+  if(/^["“«].*["”»]$/s.test(t)&&!/^["“«]/.test(src))t=t.slice(1,-1).trim();
+  if(to==='fa'){t=t.replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/(?<![A-Za-z0-9.\-])\d+(?:[.,]\d+)*(?![A-Za-z])/g,m=>m.replace(/\d/g,d=>FA[d]))}
+  else t=digits(t);
+  return t;
+}
+function parseItems(text){
+  let s=String(text).trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');
+  let j;try{j=JSON.parse(s)}catch(e){const a=s.indexOf('{'),b=s.lastIndexOf('}');if(a<0||b<a)throw new TrErr('format','json');try{j=JSON.parse(s.slice(a,b+1))}catch(x){throw new TrErr('format','json')}}
+  const arr=Array.isArray(j)?j:(j.items||j.translations||[]),m={};
+  arr.forEach(x=>{if(x&&x.id!=null&&typeof x.text==='string')m[String(x.id)]=x.text});return m;
+}
+async function trRequest(items,from,to,objs){
+  const L={fa:'Persian',en:'English'},refs=refsFor([...new Set(items.map(i=>i.kind))],new Set(objs));
+  const user=JSON.stringify({from:L[from],to:L[to],items,reference_pairs:refs});
+  const r=await llm(TR_SYSTEM,user),map=parseItems(r.text),out={};
+  items.forEach(i=>{const t=map[i.id];if(t==null)return;const c=trClean(t,to,i.text);
+    const okScript=to==='fa'?/[؀-ۿ]/.test(c):/[A-Za-z]/.test(c);
+    if(c&&(okScript||!/\p{L}/u.test(i.text)))out[i.id]=c});
+  out._model=r.model;return out;
+}
+
+/* ---- queue: batches quick successive requests, retries on rate limits ---- */
+const TRQ={items:[],timer:0,running:false,last:0},TRBUSY=new Set();
+function trOne(it){
+  const p=new Promise((res,rej)=>{TRQ.items.push({it,res,rej});clearTimeout(TRQ.timer);TRQ.timer=setTimeout(trFlush,350)});
+  TRBUSY.add(p);const done=()=>TRBUSY.delete(p);p.then(done,done);return p;
+}
+const trIdle=()=>Promise.allSettled([...TRBUSY]);
+async function trFlush(){
+  if(TRQ.running){TRQ.timer=setTimeout(trFlush,400);return}
+  const batch=TRQ.items.splice(0);if(!batch.length)return;TRQ.running=true;
+  try{
+    const groups={};batch.forEach(b=>{const k=b.it.from+b.it.to;(groups[k]=groups[k]||[]).push(b)});
+    for(const k in groups){await trRun(groups[k]);await sleep(Math.max(0,800-(Date.now()-TRQ.last)))}
+  }finally{TRQ.running=false}
+}
+async function trRun(g){
+  const from=g[0].it.from,to=g[0].it.to,delays=[4000,10000,20000];let n=0;
+  for(;;){
+    try{
+      TRQ.last=Date.now();
+      const out=await trRequest(g.map((b,i)=>({id:String(i+1),kind:b.it.kind,text:b.it.text})),from,to,g.map(b=>b.it.obj));
+      g.forEach((b,i)=>{const t=out[String(i+1)];t?b.res(t):b.rej(new TrErr('format','missing'))});return;
+    }catch(e){
+      if((e.code===429||e.code===500||e.code===503)&&n<delays.length){await sleep(delays[n++]);continue}
+      g.forEach(b=>b.rej(e));return;
+    }
+  }
+}
+
+/* ---- UI binding for a pair of fields {en,fa}; obj._t = side that holds an unreviewed machine translation ---- */
+function trBind(obj,els,note,kind){
+  const seq={en:0,fa:0};
+  const refresh=()=>{
+    const m=obj._t;['en','fa'].forEach(l=>els[l].classList.toggle('auto',m===l));
+    if(!note)return;note.hidden=!m;note.replaceChildren();
+    if(m)note.append(h('span',{},'ترجمهٔ خودکار '+(m==='fa'?'فارسی':'انگلیسی')+' — لطفاً بخوانید و در صورت نیاز اصلاح کنید.'),
+      h('button',{class:'lnk',type:'button',onclick:()=>{delete obj._t;refresh();touch()}},'✓ درست است'),
+      h('button',{class:'lnk',type:'button',onclick:()=>run(m==='fa'?'en':'fa',true)},'↻ ترجمهٔ دوباره'));
+  };
+  async function run(from,force){
+    const to=from==='en'?'fa':'en',src=String(obj[from]||'').trim(),tgt=els[to],cur=String(obj[to]||'').trim();
+    if(!trReady()){if(force)toast('اول ترجمهٔ خودکار را در تب «ترجمهٔ خودکار» تنظیم کنید.',true);return}
+    if(!src){if(obj._t===to){obj[to]='';delete obj._t;tgt.value='';refresh();touch()}return}
+    if(!force&&cur&&obj._t!==to)return;
+    if(force&&cur&&obj._t!==to&&!await ask('جایگزینی متن','متنی که خودتان در این فیلد نوشته‌اید با ترجمهٔ خودکار جایگزین شود؟',[{key:0,label:'نه'},{key:1,label:'بله، ترجمه شود',cls:'pri'}]))return;
+    const me=++seq[to],ph=tgt.placeholder;tgt.readOnly=true;tgt.placeholder='در حال ترجمه…';
+    try{
+      const out=await trOne({text:src,from,to,kind,obj});
+      if(me===seq[to]){obj[to]=out;obj._t=to;tgt.value=out;tgt.dispatchEvent(new Event('rpm-fill'))}
+    }catch(e){if(me===seq[to])toast(trErr(e),true)}
+    finally{if(me===seq[to]){tgt.readOnly=false;tgt.placeholder=ph;refresh();touch()}}
+  }
+  ['en','fa'].forEach(l=>{
+    els[l].addEventListener('input',()=>{if(obj._t===l){delete obj._t;refresh()}});
+    els[l].addEventListener('change',()=>run(l,false));
+  });
+  refresh();return {refresh,run};
+}
+function kindOfKey(key,area){
+  if(/^hero\.n[12]$|^brand$/.test(key))return 'person name or brand name';
+  if(/^nav\./.test(key))return 'navigation menu item (one or two words)';
+  if(/cta|^a\.|^lb\.|^ct\.(tg|ig|em|ph|copied|sel)$|^ft\./.test(key))return 'short interface label or button text';
+  if(/^(works|cube|pr|about|cv|ct)\.(lbl|h)$/.test(key))return 'section heading';
+  return area?'paragraph of website copy':'short label';
+}
+function unreviewed(){let n=0;(function w(o){if(Array.isArray(o))o.forEach(w);else if(o&&typeof o==='object'){if(o._t)n++;Object.values(o).forEach(w)}})(st.c);return n}
+
+/* ================= UI: shared field builders ================= */
+function touch(){const s=$('#status');if(s){const d=dirty();s.replaceChildren(h('i',{class:'dot'+(d?' d':'')}),d?'تغییرات منتشرنشده':'همه‌چیز منتشر شده')}
+  const p=$('#pubdot');if(p)p.textContent=dirty()?'●':'';saveDraftSoon()}
+function inp(obj,key,o={}){
+  const area=o.area,el=h(area?'textarea':'input',{class:'in'+(o.en?' en':''),dir:o.en?'ltr':(o.dir||'rtl'),type:area?null:(o.type||'text'),rows:area?(o.rows||3):null,inputmode:o.mode||null,placeholder:o.ph||null,value:(obj[key]==null||(o.num&&!obj[key]))?'':obj[key],
+    oninput:e=>{let v=e.target.value;if(o.num)v=v===''?0:(parseInt(digits(v),10)||0);obj[key]=v;touch()},
+    onchange:e=>{if(o.norm){const v=o.norm(e.target.value);e.target.value=v;obj[key]=v;touch()}}});
+  return el;
+}
+function pair(obj,label,o={}){ // obj={en,fa}; one side can be filled, the other is translated automatically
+  const en=inp(obj,'en',Object.assign({},o,{en:true,dir:'ltr'})),fa=inp(obj,'fa',o),note=h('div',{class:'trn',hidden:true});
+  trBind(obj,{en,fa},note,o.kind||(o.area?'paragraph of website copy':'short label'));
+  return h('div',{class:'fld'},label&&h('label',{},label),h('div',{class:'two'},h('div',{},h('span',{class:'tag'},'English'),en),h('div',{},h('span',{class:'tag'},'فارسی'),fa)),note,o.hint&&h('p',{class:'hint'},o.hint));
+}
+const txp=(key,label,o={})=>pair(st.c.tx[key]||(st.c.tx[key]={en:'',fa:''}),label,Object.assign({kind:kindOfKey(key,o.area)},o));
+function fileBtn(label,onfile,cls='btn sm'){
+  const f=h('input',{type:'file',accept:'image/*',hidden:true,onchange:e=>{const x=e.target.files[0];e.target.value='';if(x)onfile(x)}});
+  return h('span',{},f,h('button',{class:cls,type:'button',onclick:()=>f.click()},label));
+}
+
+/* ================= tab: texts ================= */
+const GROUPS=[
+ ['سربرگ و منو',[['brand','نام کنار لوگو'],['nav.works','منو: آثار'],['nav.cube','منو: مجموعهٔ ویژه'],['nav.about','منو: دربارهٔ من'],['nav.resume','منو: رزومه'],['nav.contact','منو: تماس']]],
+ ['بالای صفحه (معرفی)',[['hero.role','عنوان کوچک بالای نام'],['hero.n1','نام (خط اول)'],['hero.n2','نام (خط دوم)'],['hero.lead','متن معرفی',1],['hero.cta1','دکمهٔ اول'],['hero.cta2','دکمهٔ دوم'],['hero.loc','محل اجرای آثار'],['hero.avail','وضعیت سفارش'],['hero.fig','زیرنویس عکس']]],
+ ['بخش آثار',[['works.lbl','برچسب کوچک'],['works.h','عنوان بخش'],['works.sub','توضیح زیر عنوان',1],['f.all','نام فیلتر «همه»'],['pr.n','نوشتهٔ تعداد آثار (چند اثر)','','{n} جای عدد را می‌گیرد؛ مثلاً «{n} اثر»'],['pr.n1','نوشتهٔ تعداد آثار (یک اثر)','','{n} جای عدد را می‌گیرد']]],
+ ['مجموعهٔ ویژه (بخش تیره با گالری افقی)',[['cube.lbl','برچسب کوچک'],['cube.h','عنوان بخش'],['cube.p1','پاراگراف ۱',1],['cube.p2','پاراگراف ۲',1],['cube.p3','پاراگراف ۳',1],['cube.p4','پاراگراف ۴',1],['cube.sig','امضای زیر متن'],['cube.hint','راهنمای اسکرول'],['pr.cube.t','نام در بخش «حوزه‌های کار»'],['pr.cube.d','توضیح در بخش «حوزه‌های کار»',1]]],
+ ['حوزه‌های کار',[['pr.lbl','برچسب کوچک'],['pr.h','عنوان بخش']]],
+ ['دربارهٔ من',[['about.lbl','برچسب کوچک'],['about.s','جملهٔ بزرگ ابتدای بخش',1],['about.p2','پاراگراف ۲',1],['about.p3','پاراگراف ۳',1],['about.p4','پاراگراف ۴',1],['about.pull','نقل‌قول پایانی',1],['about.fig','زیرنویس عکس']]],
+ ['رزومه (عنوان بخش)',[['cv.lbl','برچسب کوچک'],['cv.h','عنوان بخش']]],
+ ['تماس',[['ct.lbl','برچسب کوچک'],['ct.h','عنوان بخش'],['ct.lead','متن دعوت',1],['ct.cta','دکمهٔ تلگرام'],['ct.tg','برچسب تلگرام'],['ct.ig','برچسب اینستاگرام'],['ct.em','برچسب ایمیل'],['ct.ph','برچسب تلفن'],['ct.copied','پیام «کپی شد»'],['ct.sel','پیام انتخاب متن']]],
+ ['پایین صفحه',[['ft.c','متن حقوق'],['ft.top','لینک بازگشت به بالا']]],
+ ['پنجرهٔ نمایش اثر',[['lb.year','برچسب سال'],['lb.mat','برچسب متریال'],['lb.dim','برچسب ابعاد'],['lb.place','برچسب مکان'],['lb.cm','واحد (سانتی‌متر)']]],
+ ['عنوان تب مرورگر و توضیح گوگل',[['title','عنوان صفحه'],['desc','توضیح کوتاه برای نتایج گوگل',1]]],
+ ['برچسب‌های دسترس‌پذیری (پیشرفته)',[['a.alt.studio','توضیح عکس بالای صفحه',1],['a.alt.smile','توضیح عکس بخش درباره/تماس',1],['a.view','برچسب کارت اثر','','{t} جای عنوان اثر را می‌گیرد'],['a.sculpt','پیشوند توضیح عکس'],['a.close','بستن'],['a.prev','اثر قبلی'],['a.next','اثر بعدی'],['a.lb','نمایش بزرگ اثر'],['a.menu','منو'],['a.nav','ناوبری اصلی'],['a.theme','تغییر تم'],['a.lang','زبان'],['a.filters','فیلتر آثار'],['a.copyem','کپی ایمیل'],['a.copyph','کپی تلفن'],['a.opentg','باز کردن تلگرام'],['a.openig','باز کردن اینستاگرام']]]
+];
+function tabHome(){
+  const root=h('div',{});
+  root.append(h('h2',{},'متن‌های صفحه'),h('p',{class:'lead'},'هر متن را هم انگلیسی و هم فارسی ویرایش کنید. اگر یکی از دو زبان خالی بماند، سایت متن زبان دیگر را نشان می‌دهد.'));
+  GROUPS.forEach((g,gi)=>{
+    const d=h('details',{class:'card',open:gi===1||null},h('summary',{},g[0]));
+    g[1].forEach(f=>d.append(txp(f[0],f[1],{area:!!f[2],hint:f[3]})));
+    root.append(d);
+  });
+  const sd=h('details',{class:'card'},h('summary',{},'ارقام پایین بخش «دربارهٔ من»'));
+  st.c.stats.forEach((s,i)=>{
+    const kind=h('select',{class:'in',onchange:e=>{s.kind=e.target.value;if(s.kind==='text'&&!s.text)s.text={en:'',fa:''};if(s.kind==='count'&&s.n==null)s.n=0;touch();rerender()}},
+      [['count','یک عدد (با شمارش)'],['works','تعداد آثار (خودکار)'],['text','متن یا بازهٔ سال']].map(o=>h('option',{value:o[0],selected:s.kind===o[0]||null},o[1])));
+    kind.value=s.kind;
+    sd.append(h('div',{class:'fld',style:'padding-bottom:1rem;border-bottom:1px dashed var(--line)'},h('label',{},'رقم '+faNum(i+1)),
+      h('div',{class:'row',style:'margin-bottom:.6rem'},kind,s.kind==='count'&&inp(s,'n',{num:true,mode:'numeric',type:'text'})),
+      s.kind==='text'&&pair(s.text,'متن'),pair(s.label,'برچسب زیر رقم')));
+  });
+  root.append(sd);
+  return root;
+}
+
+/* ================= tab: works ================= */
+const wTitle=w=>w.title.fa||w.title.en||'(بدون عنوان)';
+function tabWorks(){
+  const c=st.c,root=h('div',{});
+  const opts=[['all','همهٔ دسته‌ها'],...c.cats.map(k=>[k.id,k.name.fa||k.name.en]),['cube','مجموعهٔ ویژه']];
+  const sel=h('select',{class:'in',style:'width:auto',onchange:e=>{st.wf=e.target.value;rerender()}},opts.map(o=>h('option',{value:o[0]},o[1])));sel.value=st.wf;
+  root.append(h('h2',{},'آثار'),h('p',{class:'lead'},'اثر جدید اضافه کنید، عکس و مشخصات را عوض کنید، یا ترتیب نمایش را با فلش‌ها تغییر دهید.'),
+    h('div',{class:'bar'},h('button',{class:'btn pri',type:'button',onclick:()=>editWork(-1)},'+ افزودن اثر'),sel,h('span',{class:'grow'}),h('span',{class:'hint'},faNum(c.works.length)+' اثر')));
+  const vis=c.works.map((w,i)=>i).filter(i=>st.wf==='all'||c.works[i].cat===st.wf);
+  const grid=h('div',{class:'grid'});
+  vis.forEach((i,k)=>{
+    const w=c.works[i],isNew=!!st.pend[w.img];
+    const mv=dir=>{const j=vis[k+dir];if(j==null)return;[c.works[i],c.works[j]]=[c.works[j],c.works[i]];touch();rerender()};
+    grid.append(h('div',{class:'wc'},h('span',{class:'badge'},catName(w.cat)),isNew&&h('span',{class:'badge new'},'جدید'),
+      h('img',{src:imgSrc(w.img,w.ext,560),alt:'',loading:'lazy',onclick:()=>editWork(i)}),
+      h('div',{class:'meta'},h('div',{class:'t'},wTitle(w)),h('div',{class:'s'},[w.year?faNum(w.year):'',w.mat.fa||w.mat.en].filter(Boolean).join(' · ')||'—',[w.title,w.mat,w.place].some(o=>o&&o._t)&&h('span',{style:'color:var(--bronze);font-weight:700'},' · ترجمه بررسی نشده'))),
+      h('div',{class:'act'},h('button',{class:'btn sm',type:'button',onclick:()=>editWork(i)},'ویرایش'),h('span',{style:'flex:1'}),
+        h('button',{class:'ic',type:'button',title:'جلوتر',disabled:k===0||null,onclick:()=>mv(-1)},'→'),
+        h('button',{class:'ic',type:'button',title:'عقب‌تر',disabled:k===vis.length-1||null,onclick:()=>mv(1)},'←'),
+        h('button',{class:'ic',type:'button',title:'حذف',onclick:async()=>{if(await ask('حذف اثر','«'+wTitle(w)+'» از سایت حذف شود؟',[{key:0,label:'انصراف'},{key:1,label:'حذف',cls:'danger'}])){c.works.splice(i,1);touch();rerender()}}},'✕'))));
+  });
+  root.append(vis.length?grid:h('p',{class:'hint'},'اثری در این دسته نیست.'));
+  return root;
+}
+function makeBase(t){let b;do{b=(slugify(t)||'work')+'-'+rid()}while(st.pend[b]||st.prev[b]||st.c.works.some(w=>w.img===b));return b}
+function editWork(idx){
+  const isNew=idx<0,c=st.c;
+  const w=isNew?{id:'',cat:(c.cats[0]||{id:'cube'}).id,title:{en:'',fa:''},year:0,mat:{en:'',fa:''},dims:'',place:{en:'',fa:''},img:'',ext:'webp',lq:'',avg:''}:clone(c.works[idx]);
+  let bmp=null,cr=null,pos='start',saving=false;
+  const cvEl=h('canvas',{width:640,height:640,hidden:true}),cur=h('img',{class:'cur',alt:'',src:w.img?imgSrc(w.img,w.ext,960):'',hidden:!w.img||null});
+  const zoom=h('input',{type:'range',min:1,max:4,step:.01,value:1,hidden:true,oninput:e=>{setZoom(+e.target.value)}});
+  const zl=h('span',{class:'hint',hidden:true},'بزرگ‌نمایی: عکس را بکشید تا جابه‌جا شود؛ با اسلایدر یا چرخ ماوس بزرگ کنید.');
+  const hint=h('p',{class:'hint'},isNew?'یک عکس انتخاب کنید (JPG، PNG یا WebP). عکس خودکار مربع و بهینه می‌شود.':'برای عوض کردن عکس، عکس تازه انتخاب کنید؛ وگرنه عکس فعلی می‌ماند.');
+  function clamp(){const [W,H]=dimsOf(bmp),m=cr.side/2;cr.cx=Math.min(W-m,Math.max(m,cr.cx));cr.cy=Math.min(H-m,Math.max(m,cr.cy))}
+  function draw(){const g=cvEl.getContext('2d');g.drawImage(bmp,cr.cx-cr.side/2,cr.cy-cr.side/2,cr.side,cr.side,0,0,640,640)}
+  function setZoom(z){cr.side=cr.base/z;clamp();draw()}
+  async function pick(file){
+    try{bmp=await decodeFile(file)}catch(e){toast('این فایل عکس قابل‌خواندن نیست.',true);return}
+    const [W,H]=dimsOf(bmp);cr={cx:W/2,cy:H/2,side:Math.min(W,H),base:Math.min(W,H)};zoom.value=1;
+    cvEl.hidden=zoom.hidden=zl.hidden=false;cur.hidden=true;draw();hint.textContent=faNum(W)+' × '+faNum(H)+' پیکسل';
+  }
+  let drag=null;
+  cvEl.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};cvEl.setPointerCapture(e.pointerId);cvEl.style.cursor='grabbing'});
+  cvEl.addEventListener('pointermove',e=>{if(!drag)return;const k=cr.side/cvEl.clientWidth;cr.cx-=(e.clientX-drag.x)*k;cr.cy-=(e.clientY-drag.y)*k;drag={x:e.clientX,y:e.clientY};clamp();draw()});
+  const end=()=>{drag=null;cvEl.style.cursor=''};cvEl.addEventListener('pointerup',end);cvEl.addEventListener('pointercancel',end);
+  cvEl.addEventListener('wheel',e=>{e.preventDefault();const z=Math.min(4,Math.max(1,+zoom.value*(e.deltaY<0?1.06:.94)));zoom.value=z;setZoom(z)},{passive:false});
+  const catSel=h('select',{class:'in',onchange:e=>{w.cat=e.target.value}},[...c.cats.map(k=>h('option',{value:k.id},k.name.fa||k.name.en)),h('option',{value:'cube'},'مجموعهٔ ویژه — '+(c.tx['pr.cube.t'].fa||''))]);catSel.value=w.cat;
+  const msg=h('span',{class:'hint',style:'color:var(--err)'});
+  const saveBtn=h('button',{class:'btn pri',type:'button',onclick:save},'ذخیره');
+  async function save(){
+    if(saving)return;
+    await trIdle();
+    if(!w.title.en.trim()&&!w.title.fa.trim()){msg.textContent='عنوان اثر را بنویسید (حداقل یکی از دو زبان).';return}
+    if(!w.img&&!bmp){msg.textContent='یک عکس برای اثر انتخاب کنید.';return}
+    saving=true;saveBtn.disabled=true;msg.style.color='var(--mute)';msg.textContent='در حال آماده‌سازی عکس…';
+    try{
+      if(bmp){
+        const r=await processSquare(bmp,cr),base=makeBase(w.title.en||w.title.fa);
+        const old=w.img;if(old&&st.pend[old]){Object.values(st.pend[old].urls).forEach(u=>URL.revokeObjectURL(u));delete st.pend[old]}
+        st.pend[base]=r.pend;w.img=base;w.ext=r.ext;w.lq=r.lq;w.avg=r.avg;
+      }
+      w.title.en=w.title.en.trim();w.title.fa=w.title.fa.trim();w.dims=digits(w.dims).trim();
+      if(isNew){w.id=w.img;pos==='start'?c.works.unshift(w):c.works.push(w)}else c.works[idx]=w;
+      touch();ov.close();rerender();toast('اثر ذخیره شد؛ برای نمایش روی سایت، «انتشار» را بزنید.');
+    }catch(e){console.error(e);msg.style.color='var(--err)';msg.textContent='ذخیره نشد: '+(e.message||e);saving=false;saveBtn.disabled=false}
+  }
+  const ov=modal(close=>h('div',{class:'sheet'},h('h3',{},isNew?'افزودن اثر':'ویرایش اثر'),trReady()?h('div',{class:'note'},'فقط به یک زبان بنویسید (فارسی یا انگلیسی). زبان دیگر خودکار ترجمه می‌شود و کافی است ترجمه را بخوانید و در صورت نیاز اصلاح کنید.'):h('div',{class:'note'},'ترجمهٔ خودکار خاموش است؛ هر دو زبان را خودتان بنویسید، یا از تب «ترجمهٔ خودکار» آن را روشن کنید.'),
+    h('div',{class:'crop'},h('div',{class:'cw'},cvEl,cur),h('div',{class:'ctl'},fileBtn(isNew?'انتخاب عکس':'تعویض عکس',pick,'btn'),hint,zoom,zl)),
+    pair(w.title,'عنوان اثر',{kind:'artwork title'}),
+    h('div',{class:'two'},h('div',{class:'fld'},h('label',{},'دسته‌بندی'),catSel),h('div',{class:'fld'},h('label',{},'سال ساخت (شمسی)'),inp(w,'year',{num:true,mode:'numeric',ph:'مثلاً ۱۴۰۳'}),h('p',{class:'hint'},'اگر نمی‌دانید خالی بگذارید. در نسخهٔ انگلیسی خودکار میلادی می‌شود.'))),
+    pair(w.mat,'متریال',{kind:'artwork material'}),
+    h('div',{class:'two'},h('div',{class:'fld'},h('label',{},'ابعاد (سانتی‌متر)'),inp(w,'dims',{en:true,dir:'ltr',ph:'100 × 250 × 250'})),isNew&&h('div',{class:'fld'},h('label',{},'جایگاه در فهرست'),
+      h('select',{class:'in',onchange:e=>{pos=e.target.value}},h('option',{value:'start'},'ابتدای فهرست'),h('option',{value:'end'},'انتهای فهرست')))),
+    pair(w.place,'مکان (شهر یا محل نصب)',{kind:'location'}),
+    h('div',{class:'foot'},saveBtn,h('button',{class:'btn',type:'button',onclick:close},'انصراف'),h('span',{class:'grow'}),msg)));
+  ov.ov._dismiss=false;
+}
+
+/* ================= tab: categories ================= */
+function tabCats(){
+  const c=st.c,root=h('div',{});
+  root.append(h('h2',{},'دسته‌بندی‌ها'),h('p',{class:'lead'},'دسته‌ها هم در فیلتر بالای آثار دیده می‌شوند و هم در بخش «حوزه‌های کار». دسته‌ای که اثری ندارد روی سایت نمایش داده نمی‌شود.'));
+  c.cats.forEach((k,i)=>{
+    const n=c.works.filter(w=>w.cat===k.id).length;
+    const mv=d=>{const j=i+d;if(j<0||j>=c.cats.length)return;[c.cats[i],c.cats[j]]=[c.cats[j],c.cats[i]];touch();rerender()};
+    root.append(h('div',{class:'card'},
+      h('div',{class:'bar',style:'margin-bottom:.8rem'},h('b',{},'دستهٔ '+faNum(i+1)),h('span',{class:'hint'},faNum(n)+' اثر'),h('span',{class:'grow'}),
+        h('button',{class:'ic',type:'button',title:'بالاتر',disabled:i===0||null,onclick:()=>mv(-1)},'↑'),h('button',{class:'ic',type:'button',title:'پایین‌تر',disabled:i===c.cats.length-1||null,onclick:()=>mv(1)},'↓'),
+        h('button',{class:'btn sm danger',type:'button',onclick:()=>delCat(i)},'حذف دسته')),
+      pair(k.name,'نام دسته',{kind:'category name'}),pair(k.desc,'توضیح کوتاه (در بخش «حوزه‌های کار»)',{area:true,rows:2,kind:'category description'})));
+  });
+  root.append(h('div',{class:'bar'},h('button',{class:'btn pri',type:'button',onclick:()=>{c.cats.push({id:'cat-'+rid(),name:{en:'',fa:''},desc:{en:'',fa:''}});touch();rerender();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}},'+ دستهٔ جدید')),
+    h('div',{class:'note'},'«مجموعهٔ ویژه» (بخش تیره با گالری افقی) دستهٔ ثابتی است. اسم و متن آن را در تب «متن‌های صفحه ← مجموعهٔ ویژه» عوض کنید و اثر را هنگام افزودن، به آن دسته بدهید.'));
+  return root;
+}
+async function delCat(i){
+  const c=st.c,k=c.cats[i],n=c.works.filter(w=>w.cat===k.id).length,nm=k.name.fa||k.name.en||'بدون نام';
+  let target=null;
+  if(n){
+    const others=[...c.cats.filter((_,j)=>j!==i).map(x=>[x.id,x.name.fa||x.name.en||'بدون نام']),['cube','مجموعهٔ ویژه']];
+    const sel=h('select',{class:'in'},others.map(o=>h('option',{value:o[0]},o[1])));
+    target=await new Promise(res=>{modal(close=>h('div',{class:'sheet',style:'max-width:28rem'},h('h3',{},'حذف دستهٔ «'+nm+'»'),
+      h('p',{style:'margin:0 0 .8rem'},'این دسته '+faNum(n)+' اثر دارد. آثار به کدام دسته منتقل شوند؟'),sel,
+      h('div',{class:'foot'},h('button',{class:'btn danger',type:'button',onclick:()=>{close();res(sel.value)}},'انتقال و حذف دسته'),h('button',{class:'btn',type:'button',onclick:()=>{close();res(null)}},'انصراف'))))});
+    if(!target)return;
+  }else if(!await ask('حذف دسته','دستهٔ «'+nm+'» حذف شود؟',[{key:0,label:'انصراف'},{key:1,label:'حذف',cls:'danger'}]))return;
+  if(target)c.works.forEach(w=>{if(w.cat===k.id)w.cat=target});
+  c.cats.splice(i,1);touch();rerender();
+}
+
+/* ================= tab: resume ================= */
+function tabResume(){
+  const c=st.c,root=h('div',{});
+  root.append(h('h2',{},'رزومه'),h('p',{class:'lead'},'ستون‌ها و ردیف‌های رزومه. سال را شمسی بنویسید؛ در نسخهٔ انگلیسی خودکار میلادی نمایش داده می‌شود. ردیف بدون سال هم مجاز است.'));
+  c.resume.forEach((col,ci)=>{
+    const mvc=d=>{const j=ci+d;if(j<0||j>=c.resume.length)return;[c.resume[ci],c.resume[j]]=[c.resume[j],c.resume[ci]];touch();rerender()};
+    const card=h('div',{class:'card'},h('div',{class:'bar',style:'margin-bottom:.8rem'},h('b',{},'ستون '+faNum(ci+1)),h('span',{class:'grow'}),
+      h('button',{class:'ic',type:'button',title:'جلوتر',disabled:ci===0||null,onclick:()=>mvc(-1)},'→'),h('button',{class:'ic',type:'button',title:'عقب‌تر',disabled:ci===c.resume.length-1||null,onclick:()=>mvc(1)},'←'),
+      h('button',{class:'btn sm danger',type:'button',onclick:async()=>{if(await ask('حذف ستون','این ستون با همهٔ ردیف‌هایش حذف شود؟',[{key:0,label:'انصراف'},{key:1,label:'حذف',cls:'danger'}])){c.resume.splice(ci,1);touch();rerender()}}},'حذف ستون')),
+      pair(col.title,'عنوان ستون'));
+    col.items.forEach((it,ii)=>{
+      const mv=d=>{const j=ii+d;if(j<0||j>=col.items.length)return;[col.items[ii],col.items[j]]=[col.items[j],col.items[ii]];touch();rerender()};
+      const ren=inp(it,'en',{area:true,rows:2,en:true,dir:'ltr'}),rfa=inp(it,'fa',{area:true,rows:2}),rnote=h('div',{class:'trn',hidden:true});
+      trBind(it,{en:ren,fa:rfa},rnote,it.sub?'section heading':'CV entry');
+      card.append(h('div',{class:'cvr'+(it.sub?' sub':'')},
+        it.sub?h('div',{class:'y hint'},'زیرعنوان'):h('div',{class:'y'},h('span',{class:'tag'},'سال (شمسی)'),inp(it,'year',{num:true,mode:'numeric',ph:'—'})),
+        h('div',{},h('span',{class:'tag'},'English'),ren),
+        h('div',{},h('span',{class:'tag'},'فارسی'),rfa),
+        h('div',{class:'acts'},h('button',{class:'ic',type:'button',title:'بالاتر',disabled:ii===0||null,onclick:()=>mv(-1)},'↑'),h('button',{class:'ic',type:'button',title:'پایین‌تر',disabled:ii===col.items.length-1||null,onclick:()=>mv(1)},'↓'),
+          h('button',{class:'ic',type:'button',title:'حذف',onclick:()=>{col.items.splice(ii,1);touch();rerender()}},'✕')),rnote));
+    });
+    card.append(h('div',{class:'bar',style:'margin:1rem 0 0'},
+      h('button',{class:'btn sm',type:'button',onclick:()=>{col.items.push({year:0,en:'',fa:''});touch();rerender()}},'+ ردیف'),
+      h('button',{class:'btn sm',type:'button',onclick:()=>{col.items.push({sub:true,en:'',fa:''});touch();rerender()}},'+ زیرعنوان')));
+    root.append(card);
+  });
+  root.append(h('button',{class:'btn pri',type:'button',onclick:()=>{c.resume.push({title:{en:'',fa:''},items:[{year:0,en:'',fa:''}]});touch();rerender()}},'+ ستون جدید'));
+  return root;
+}
+
+/* ================= tab: contact + portraits ================= */
+const normH=s=>String(s).trim().replace(/^https?:\/\/(www\.)?(t\.me|telegram\.me|instagram\.com)\//i,'').replace(/^@/,'').replace(/[/?#].*$/,'');
+function tabContact(){
+  const c=st.c,ct=c.contact,root=h('div',{});
+  root.append(h('h2',{},'تماس و عکس‌ها'),h('p',{class:'lead'},'راه‌های ارتباطی که در پایین سایت نمایش داده می‌شود. فیلد خالی روی سایت نمایش داده نمی‌شود.'));
+  root.append(h('div',{class:'card'},
+    h('div',{class:'two'},h('div',{class:'fld'},h('label',{},'آی‌دی تلگرام'),inp(ct,'telegram',{en:true,dir:'ltr',norm:normH,ph:'Reyhaneh_pm'}),h('p',{class:'hint'},'بدون @ یا لینک.')),
+      h('div',{class:'fld'},h('label',{},'آی‌دی اینستاگرام'),inp(ct,'instagram',{en:true,dir:'ltr',norm:normH,ph:'username'}))),
+    h('div',{class:'two'},h('div',{class:'fld'},h('label',{},'ایمیل'),inp(ct,'email',{en:true,dir:'ltr',type:'email'})),
+      h('div',{class:'fld'},h('label',{},'تلفن (برای کپی کردن)'),inp(ct,'phone',{en:true,dir:'ltr',mode:'tel',norm:s=>digits(s).replace(/[^\d+]/g,'')}))),
+    h('div',{class:'fld'},h('label',{},'شکل نمایش تلفن'),inp(ct,'phoneDisplay',{en:true,dir:'ltr',norm:digits,ph:'0937 439 7741'}))));
+  const lab={studio:'عکس بالای صفحه (استودیو)',smile:'عکس بخش «دربارهٔ من» و «تماس»'};
+  ['studio','smile'].forEach(k=>{
+    const p=c.portraits[k];
+    root.append(h('div',{class:'card'},h('div',{class:'crop',style:'margin:0'},h('img',{class:'cur',alt:'',src:imgSrc(p.img,p.ext,640),style:'aspect-ratio:'+(p.w||3)+'/'+(p.h||4)+';max-width:12rem;object-fit:cover'}),
+      h('div',{class:'ctl'},h('b',{},lab[k]),h('p',{class:'hint'},'عکس تازه‌ای انتخاب کنید تا جایگزین شود. بهتر است عمودی (پرتره) و واضح باشد.'),
+        fileBtn('تعویض عکس',async f=>{
+          try{const bmp=await decodeFile(f),r=await processPortrait(bmp),base='portrait-'+k+'-'+rid();
+            if(st.pend[p.img]){Object.values(st.pend[p.img].urls).forEach(u=>URL.revokeObjectURL(u));delete st.pend[p.img]}
+            st.pend[base]=r.pend;c.portraits[k]={img:base,ext:r.ext,w:r.w,h:r.h,lq:r.lq,avg:r.avg};touch();rerender();toast('عکس تعویض شد.')}
+          catch(e){console.error(e);toast('عکس پردازش نشد.',true)}},'btn')))));
+  });
+  return root;
+}
+
+/* ================= tab: automatic translation ================= */
+function tabTr(){
+  const root=h('div',{}),c=TRC;
+  const field=(label,key,o={})=>h('div',{class:'fld'},h('label',{},label),h('input',{class:'in en',dir:'ltr',autocomplete:'off',spellcheck:'false',type:o.type||'text',value:c[key]||'',placeholder:o.ph||'',oninput:e=>{c[key]=e.target.value.trim();if(key==='model')GEM_MODEL=null;saveTR()}}),o.hint&&h('p',{class:'hint'},o.hint));
+  const prov=h('select',{class:'in',onchange:e=>{c.provider=e.target.value;saveTR();rerender()}},[['gemini','Google Gemini (پیشنهاد من؛ کلید رایگان)'],['anthropic','Anthropic Claude (پولی)'],['openai','سرویس سازگار با OpenAI: OpenAI، OpenRouter، DeepSeek و…']].map(o=>h('option',{value:o[0]},o[1])));prov.value=c.provider;
+  const out=h('div',{class:'log',hidden:true});
+  const test=h('button',{class:'btn',type:'button',onclick:async()=>{
+    if(!c.key){toast('اول کلید را وارد کنید.',true);return}
+    test.disabled=true;out.hidden=false;out.replaceChildren(h('div',{},'در حال آزمایش…'));
+    try{
+      const a=await trOne({text:'مجسمه‌ای از آهن و سنگ که از خاطرهٔ کودکی‌ام الهام گرفته است.',from:'fa',to:'en',kind:'paragraph of website copy',obj:{}});
+      const b=await trOne({text:'Between aesthetics and lived experience, I build bridges.',from:'en',to:'fa',kind:'paragraph of website copy',obj:{}});
+      out.replaceChildren(h('div',{},'فارسی ← انگلیسی:'),h('div',{class:'en',style:'margin:.2rem 0 .8rem'},a),h('div',{},'انگلیسی ← فارسی:'),h('div',{style:'margin:.2rem 0'},b),h('div',{class:'o'},'ترجمه کار می‌کند ✓'+(GEM_MODEL&&c.provider==='gemini'&&!c.model?' (مدل: '+GEM_MODEL+')':'')));
+    }catch(e){out.replaceChildren(h('div',{class:'e'},trErr(e)))}
+    test.disabled=false;
+  }},'آزمایش ترجمه');
+  root.append(h('h2',{},'ترجمهٔ خودکار'),h('p',{class:'lead'},'با این قابلیت فقط یک زبان را می‌نویسید (فارسی یا انگلیسی). زبان دیگر را هوش مصنوعی ترجمه می‌کند و شما فقط آن را می‌خوانید و اگر لازم بود اصلاح می‌کنید. ترجمه‌های بررسی‌نشده با رنگ برنز و برچسب مشخص می‌شوند.'));
+  root.append(h('div',{class:'card'},
+    h('label',{style:'display:flex;gap:.5rem;align-items:center;margin-bottom:1rem;font-weight:700'},h('input',{type:'checkbox',checked:c.on||null,onchange:e=>{c.on=e.target.checked;saveTR()}}),'ترجمهٔ خودکار فعال باشد'),
+    h('div',{class:'fld'},h('label',{},'سرویس ترجمه'),prov),
+    field('کلید دسترسی (API key)','key',{type:'password',ph:c.provider==='gemini'?'AIza…':(c.provider==='anthropic'?'sk-ant-…':'sk-…')}),
+    c.provider==='openai'&&field('آدرس سرویس (Base URL)','base',{ph:'https://openrouter.ai/api/v1'}),
+    (c.provider!=='gemini')&&field('نام مدل','model',{ph:c.provider==='anthropic'?'claude-sonnet-5-5':'نام مدل را از سرویس‌دهنده بگیرید',hint:c.provider==='anthropic'?'اگر خالی بماند از claude-sonnet-5-5 استفاده می‌شود.':null}),
+    c.provider==='gemini'&&h('details',{style:'margin-bottom:1rem'},h('summary',{style:'cursor:pointer;font-weight:700'},'پیشرفته: انتخاب دستی مدل'),h('div',{style:'margin-top:.7rem'},field('نام مدل','model',{ph:'خالی = جدیدترین مدل Flash پایدار',hint:'معمولاً لازم نیست چیزی بنویسید؛ پنل خودش جدیدترین مدل Flash پایدار را پیدا می‌کند. مدل‌های Pro دقیق‌ترند ولی ممکن است رایگان نباشند.'}))),
+    h('label',{style:'display:flex;gap:.5rem;align-items:center;margin-bottom:1rem'},h('input',{type:'checkbox',checked:c.remember||null,onchange:e=>{c.remember=e.target.checked;saveTR()}}),'کلید روی همین دستگاه ذخیره شود (فقط روی کامپیوتر یا گوشی شخصی خودتان)'),
+    h('div',{class:'bar',style:'margin:0'},test),out));
+  if(c.provider==='gemini')root.append(h('details',{class:'card',open:!c.key||null},h('summary',{},'گرفتن کلید رایگان Gemini'),
+    h('div',{class:'note'},'Gemini رسماً در ایران پشتیبانی نمی‌شود؛ برای ساخت کلید و برای ترجمه باید فیلترشکن روشن باشد. شرایط استفاده با خود گوگل است و سقف رایگان را گوگل تعیین می‌کند و تضمین نمی‌کند.'),
+    h('ol',{class:'steps'},h('li',{},'فیلترشکن را روشن کنید.'),h('li',{},'به ',h('span',{class:'code'},'aistudio.google.com/apikey'),' بروید و با حساب گوگل وارد شوید.'),h('li',{},'روی ',h('b',{},'Create API key'),' بزنید (اگر پروژه خواست، یکی بسازید یا انتخاب کنید).'),h('li',{},'کلید ساخته‌شده را کپی کنید و در کادر «کلید دسترسی» بالا بچسبانید.'),h('li',{},'«آزمایش ترجمه» را بزنید.'))));
+  root.append(h('div',{class:'note'},'کیفیت ترجمه‌ها به مدل بستگی دارد. پنل برای کمک به انتخاب واژه‌ها، از ترجمه‌های تأییدشدهٔ خود سایت (عنوان‌ها، متریال‌ها، رزومه و متن‌ها) به‌عنوان نمونه استفاده می‌کند، پس هرچه ترجمه‌های درست بیشتری داشته باشید، ترجمه‌ها یکدست‌تر می‌شوند. متن شما برای ترجمه فقط به همان سرویس ارسال می‌شود.'));
+  return root;
+}
+
+/* ================= tab: publish ================= */
+const tn=w=>w.title.fa||w.title.en||'بدون عنوان';
+function changes(){
+  const old=JSON.parse(st.base),c=st.c,out=[],oid=new Map(old.works.map(w=>[w.id,w])),nid=new Map(c.works.map(w=>[w.id,w]));
+  c.works.forEach(w=>{if(!oid.has(w.id))out.push('اثر جدید: '+tn(w));else if(JSON.stringify(oid.get(w.id))!==JSON.stringify(w))out.push('ویرایش اثر: '+tn(w))});
+  old.works.forEach(w=>{if(!nid.has(w.id))out.push('حذف اثر: '+tn(w))});
+  const co=old.works.filter(w=>nid.has(w.id)).map(w=>w.id).join(),cn=c.works.filter(w=>oid.has(w.id)).map(w=>w.id).join();if(co!==cn)out.push('تغییر ترتیب آثار');
+  [['tx','متن‌های صفحه'],['cats','دسته‌بندی‌ها'],['stats','ارقام'],['resume','رزومه'],['contact','اطلاعات تماس'],['portraits','عکس‌های پرتره']].forEach(([k,l])=>{if(JSON.stringify(old[k])!==JSON.stringify(c[k]))out.push('تغییر '+l)});
+  return out;
+}
+function problems(){
+  const p=[];st.c.works.forEach(w=>{if(!w.img)p.push('اثر «'+tn(w)+'» عکس ندارد.')});return p;
+}
+function logLine(t,cls){st.log.push([t,cls]);const l=$('#log');if(l){l.append(h('div',{class:cls||''},t));l.scrollTop=l.scrollHeight}}
+function tabPub(){
+  const root=h('div',{}),cfg=st.cfg,ch=dirty()?changes():[];
+  root.append(h('h2',{},'انتشار'),h('p',{class:'lead'},'تغییرات شما فقط وقتی روی سایت دیده می‌شود که اینجا منتشر کنید. بعد از انتشار، حدود یک تا دو دقیقه صبر کنید تا گیت‌هاب سایت را به‌روز کند.'));
+  if(unreviewed())root.append(h('div',{class:'note'},faNum(unreviewed())+' ترجمهٔ خودکار هنوز بررسی نشده. در بخش‌های مربوط، فیلدهای برنزرنگ را بخوانید و «✓ درست است» را بزنید.'));
+  root.append(h('div',{class:'card'},h('b',{},'تغییرات منتشرنشده'),ch.length?h('ul',{class:'chg'},ch.slice(0,40).map(x=>h('li',{},x))):h('p',{class:'hint',style:'margin:.3rem 0 0'},dirty()?'تغییر عکس‌ها':'چیزی برای انتشار نیست.')));
+  const f=(label,key,o={})=>h('div',{class:'fld'},h('label',{},label),h('input',{class:'in en',dir:'ltr',autocomplete:'off',spellcheck:'false',type:o.type||'text',value:cfg[key]||'',placeholder:o.ph||'',oninput:e=>{cfg[key]=e.target.value.trim();saveCfg()}}),o.hint&&h('p',{class:'hint'},o.hint));
+  const conn=h('details',{class:'card',open:!cfg.token||null},h('summary',{},'اتصال به گیت‌هاب'),
+    h('div',{class:'note'},'فقط یک‌بار لازم است. راهنمای کامل ساخت توکن در فایل README همراه سایت و در توضیحات من است. توکن فقط در همین مرورگر می‌ماند و جایی ارسال نمی‌شود جز به خود گیت‌هاب.'),
+    h('div',{class:'two'},f('نام کاربری گیت‌هاب','owner',{ph:'username'}),f('نام مخزن (Repository)','repo',{ph:'my-portfolio'})),
+    h('div',{class:'two'},f('شاخه (Branch)','branch',{ph:'main'}),f('توکن دسترسی (Token)','token',{type:'password',ph:'github_pat_…'})),
+    h('label',{style:'display:flex;gap:.5rem;align-items:center;margin-bottom:1rem'},h('input',{type:'checkbox',checked:cfg.remember||null,onchange:e=>{cfg.remember=e.target.checked;saveCfg()}}),'این اطلاعات روی همین دستگاه ذخیره شود (فقط روی کامپیوتر یا گوشی شخصی خودتان)'),
+    h('button',{class:'btn',type:'button',onclick:testConn},'آزمایش اتصال'));
+  const pub=h('button',{class:'btn pri',type:'button',id:'pubBtn',disabled:st.busy||!dirty()||null,onclick:publish},'انتشار تغییرات روی سایت');
+  const zip=h('button',{class:'btn',type:'button',disabled:st.busy||!dirty()||null,onclick:downloadZip},'دانلود بستهٔ تغییرات (بدون اتصال به گیت‌هاب)');
+  root.append(conn,h('div',{class:'bar'},pub,zip),h('p',{class:'hint'},'اگر توکن ندارید، «دانلود بسته» یک فایل zip می‌دهد؛ آن را باز کنید و محتوایش را از صفحهٔ مخزن گیت‌هاب (Add file ← Upload files) بارگذاری کنید.'));
+  root.append(h('div',{class:'log',id:'log'},st.log.map(l=>h('div',{class:l[1]||''},l[0]))));
+  if(!st.log.length)$('#log',root).hidden=true;
+  return root;
+}
+function needCfg(){const c=st.cfg;if(!c.owner||!c.repo||!c.branch||!c.token){toast('اول اطلاعات اتصال به گیت‌هاب را کامل کنید.',true);return false}return true}
+function showLog(){const l=$('#log');if(l)l.hidden=false}
+async function sha1git(text){try{const b=new TextEncoder().encode(text),h0=new TextEncoder().encode('blob '+b.length+'\0'),u=new Uint8Array(h0.length+b.length);u.set(h0);u.set(b,h0.length);
+  return [...new Uint8Array(await crypto.subtle.digest('SHA-1',u))].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return null}}
+async function testConn(){
+  if(!needCfg())return;
+  st.log=[];showLog();const l=$('#log');l&&l.replaceChildren();
+  try{
+    logLine('در حال اتصال…');
+    const {owner,repo,branch}=st.cfg,base=`/repos/${owner}/${repo}`;
+    const r=await gh(`${base}`);logLine('مخزن پیدا شد: '+r.full_name);
+    await gh(`${base}/git/ref/heads/${branch}`);logLine('شاخهٔ «'+branch+'» پیدا شد.');
+    if(r.permissions&&r.permissions.push===false)logLine('هشدار: این توکن اجازهٔ نوشتن ندارد.','e');else logLine('اتصال برقرار است ✓','o');
+    if(!dirty()){const ok=await loadRemote();if(ok){logLine('آخرین نسخهٔ محتوا از گیت‌هاب خوانده شد.','o');rerender()}}
+  }catch(e){logLine(ghMsg(e),'e')}
+}
+async function loadRemote(){
+  try{
+    const {owner,repo,branch}=st.cfg,f=await gh(`/repos/${owner}/${repo}/contents/content.json?ref=${encodeURIComponent(branch)}`);
+    const c=JSON.parse(unb64utf8(f.content));st.c=fixContent(c);st.base=ser();st.baseSha=f.sha;return true;
+  }catch(e){return false}
+}
+async function publish(){
+  if(st.busy||!needCfg())return;
+  const pr=problems();if(pr.length){toast(pr[0],true);return}
+  await trIdle();
+  const un=unreviewed();
+  if(un&&!await ask('ترجمه‌های بررسی‌نشده',faNum(un)+' مورد ترجمهٔ خودکار هنوز بررسی نشده است. پیشنهاد می‌کنم اول آن‌ها را بخوانید؛ فیلدهای برنزرنگ، ترجمهٔ بررسی‌نشده‌اند. اگر مطمئن هستید، همین‌طور منتشر شود؟',[{key:0,label:'بازگشت و بررسی'},{key:1,label:'همین‌طور منتشر شود',cls:'pri'}]))return;
+  st.busy=true;st.log=[];rerender();showLog();
+  try{
+    const {owner,repo,branch}=st.cfg,B=`/repos/${owner}/${repo}`;
+    logLine('اتصال به گیت‌هاب…');
+    const ref=await gh(`${B}/git/ref/heads/${encodeURIComponent(branch)}`),head=ref.object.sha,commit=await gh(`${B}/git/commits/${head}`);
+    let remote=null;
+    try{const f=await gh(`${B}/contents/content.json?ref=${encodeURIComponent(branch)}`);remote={sha:f.sha,json:JSON.parse(unb64utf8(f.content))}}catch(e){if(e.status!==404)throw e}
+    if(remote&&st.baseSha&&remote.sha!==st.baseSha){
+      const k=await ask('سایت در این فاصله تغییر کرده','نسخهٔ منتشرشدهٔ سایت با نسخه‌ای که ویرایش می‌کردید فرق دارد (شاید از دستگاه دیگری منتشر شده). اگر ادامه دهید، همین نسخهٔ شما جایگزین می‌شود.',[{key:0,label:'انصراف'},{key:1,label:'ادامه و جایگزین کردن',cls:'danger'}]);
+      if(!k){logLine('انتشار لغو شد.','e');st.busy=false;rerender();return}
+    }
+    const used=usedFiles(st.c),old=remote?usedFiles(remote.json):new Set(),entries=[];
+    const jobs=[];
+    for(const base in st.pend){const p=st.pend[base];for(const s in p.files){const path=`img/${base}-${s}.${p.ext}`;if(used.has(path))jobs.push({path,blob:p.files[s]})}}
+    let n=0;logLine('بارگذاری '+faNum(jobs.length)+' فایل عکس…');
+    for(const j of jobs){const bl=await gh(`${B}/git/blobs`,{method:'POST',body:{content:await blobB64(j.blob),encoding:'base64'}});entries.push({path:j.path,mode:'100644',type:'blob',sha:bl.sha});logLine('  '+faNum(++n)+' / '+faNum(jobs.length));}
+    const text=JSON.stringify(st.c,null,1)+'\n';
+    const cb=await gh(`${B}/git/blobs`,{method:'POST',body:{content:b64utf8(text),encoding:'base64'}});
+    entries.push({path:'content.json',mode:'100644',type:'blob',sha:cb.sha});
+    let del=0;old.forEach(p=>{if(!used.has(p)){entries.push({path:p,mode:'100644',type:'blob',sha:null});del++}});
+    if(del)logLine('حذف '+faNum(del)+' عکس قدیمی که دیگر استفاده نمی‌شود…');
+    logLine('ثبت تغییرات…');
+    const tree=await gh(`${B}/git/trees`,{method:'POST',body:{base_tree:commit.tree.sha,tree:entries}});
+    const nc=await gh(`${B}/git/commits`,{method:'POST',body:{message:'به‌روزرسانی محتوا از پنل مدیریت',tree:tree.sha,parents:[head]}});
+    await gh(`${B}/git/refs/heads/${encodeURIComponent(branch)}`,{method:'PATCH',body:{sha:nc.sha}});
+    st.base=ser();st.baseSha=cb.sha;for(const b in st.pend)st.prev[b]=st.pend[b];st.pend={};await DB.del();
+    logLine('منتشر شد ✓ — حدود یک تا دو دقیقه بعد روی سایت دیده می‌شود.','o');toast('منتشر شد ✓');
+  }catch(e){console.error(e);logLine(ghMsg(e),'e')}
+  st.busy=false;rerender();showLog();
+}
+async function downloadZip(){
+  const pr=problems();if(pr.length){toast(pr[0],true);return}
+  const used=usedFiles(st.c),files=[{name:'content.json',text:JSON.stringify(st.c,null,1)+'\n'}];
+  for(const base in st.pend){const p=st.pend[base];for(const s in p.files){const path=`img/${base}-${s}.${p.ext}`;if(used.has(path))files.push({name:path,blob:p.files[s]})}}
+  const z=await makeZip(files),a=h('a',{href:URL.createObjectURL(z),download:'site-update.zip'});document.body.append(a);a.click();a.remove();
+  toast('فایل zip دانلود شد. محتوای آن را روی مخزن گیت‌هاب بارگذاری کنید.');
+}
+
+/* ================= preview ================= */
+function openPreview(){
+  if(location.protocol==='file:'){toast('پیش‌نمایش فقط وقتی کار می‌کند که پنل از روی سایت منتشرشده یا یک سرور باز شده باشد.',true);return}
+  const fr=h('iframe',{src:'../index.html?preview=1',title:'پیش‌نمایش'});
+  const pv=h('div',{class:'pv'},h('div',{class:'pb'},h('b',{},'پیش‌نمایش'),h('span',{class:'hint'},'این همان سایت با تغییرات شماست، هنوز منتشر نشده.'),h('span',{class:'grow'}),
+    h('button',{class:'btn sm',type:'button',onclick:()=>pv.classList.toggle('m')},'دسکتاپ / موبایل'),h('button',{class:'btn sm pri',type:'button',onclick:()=>{removeEventListener('message',onMsg);pv.remove();document.body.style.overflow=''}},'بستن')),h('div',{class:'fw'},fr));
+  const onMsg=e=>{if(e.source!==fr.contentWindow||e.origin!==location.origin)return;if(e.data&&e.data.type==='rpm-ready')fr.contentWindow.postMessage({type:'rpm-content',content:JSON.parse(ser()),imgs:imgMap()},location.origin)};
+  addEventListener('message',onMsg);document.body.append(pv);document.body.style.overflow='hidden';
+}
+
+/* ================= shell + boot ================= */
+const TABS=[['home','متن‌های صفحه'],['works','آثار'],['cats','دسته‌بندی‌ها'],['resume','رزومه'],['contact','تماس و عکس‌ها'],['tr','ترجمهٔ خودکار'],['pub','انتشار']];
+function renderShell(){
+  const app=$('#app');app.replaceChildren(
+    h('header',{class:'top'},h('h1',{},'پنل مدیریت',h('small',{},'ریحانه پیرزاده مقدم')),h('span',{id:'status',class:'hint'}),
+      h('button',{class:'btn sm',type:'button',onclick:openPreview},'پیش‌نمایش'),h('button',{class:'btn sm pri',type:'button',onclick:()=>{st.tab='pub';rerender()}},'انتشار')),
+    h('div',{class:'shell'},h('nav',{class:'side','aria-label':'بخش‌ها'},TABS.map(t=>h('button',{type:'button','data-tab':t[0],onclick:()=>{st.tab=t[0];rerender();window.scrollTo(0,0)}},t[1],t[0]==='works'&&h('b',{},faNum(st.c.works.length)),t[0]==='pub'&&h('b',{id:'pubdot'})))),
+      h('main',{id:'main'})));
+}
+function rerender(){
+  const y=window.scrollY;
+  if(!$('#main'))renderShell();
+  $$all('.side button').forEach(b=>b.setAttribute('aria-current',b.dataset.tab===st.tab?'true':'false'));
+  const fn={home:tabHome,works:tabWorks,cats:tabCats,resume:tabResume,contact:tabContact,tr:tabTr,pub:tabPub}[st.tab];
+  $('#main').replaceChildren(fn());
+  const wb=$('.side button[data-tab="works"] b');if(wb)wb.textContent=faNum(st.c.works.length);
+  touch();window.scrollTo(0,y);
+}
+const $$all=s=>[...document.querySelectorAll(s)];
+function fixContent(c){
+  c.tx=c.tx||{};c.cats=c.cats||[];c.works=c.works||[];c.resume=c.resume||[];c.contact=Object.assign({telegram:'',instagram:'',email:'',phone:'',phoneDisplay:''},c.contact);
+  c.stats=c.stats||[];while(c.stats.length<4)c.stats.push({kind:'count',n:0,label:{en:'',fa:''}});
+  c.portraits=c.portraits||{};
+  ['studio','smile'].forEach(k=>{c.portraits[k]=c.portraits[k]||{img:'portrait-'+k,ext:'webp',w:1000,h:1333,lq:'',avg:'#777'}});
+  ['pr.cube.t','pr.cube.d'].forEach(k=>{c.tx[k]=c.tx[k]||{en:'',fa:''}});
+  c.cats.forEach(k=>{k.name=k.name||{en:'',fa:''};k.desc=k.desc||{en:'',fa:''}});
+  c.works.forEach(w=>{w.title=w.title||{en:'',fa:''};w.mat=w.mat||{en:'',fa:''};w.place=w.place||{en:'',fa:''};w.dims=w.dims||'';w.year=+w.year||0});
+  c.resume.forEach(col=>{col.title=col.title||{en:'',fa:''};col.items=col.items||[]});
+  return c;
+}
+async function start(c,baseSha){
+  st.c=fixContent(c);st.base=ser();st.baseSha=baseSha||await sha1git(JSON.stringify(c,null,1)+'\n')||null;
+  const d=await DB.get();
+  if(d&&d.c&&(JSON.stringify(d.c)!==st.base||Object.keys(d.pend||{}).length)){
+    const k=await ask('پیش‌نویس ذخیره‌نشده','تغییراتی که قبلاً ایجاد کرده بودید و منتشر نشده پیدا شد'+(d.t?' ('+new Date(d.t).toLocaleString('fa-IR')+')':'')+'. بازیابی شود؟',[{key:0,label:'حذف پیش‌نویس',cls:'danger'},{key:1,label:'بازیابی',cls:'pri'}]);
+    if(k){st.c=fixContent(d.c);for(const b in d.pend){const p=d.pend[b];st.pend[b]={ext:p.ext,files:p.files,urls:mkUrls(p.files)}}}else await DB.del();
+  }
+  rerender();
+}
+async function boot(){
+  let c=null,sha=null;
+  if(st.cfg.token&&st.cfg.owner&&st.cfg.repo){try{const f=await gh(`/repos/${st.cfg.owner}/${st.cfg.repo}/contents/content.json?ref=${encodeURIComponent(st.cfg.branch)}`);c=JSON.parse(unb64utf8(f.content));sha=f.sha}catch(e){}}
+  if(!c&&location.protocol!=='file:'){try{const r=await fetch('../content.json',{cache:'no-store'});if(r.ok)c=await r.json()}catch(e){}}
+  if(c)return start(c,sha);
+  const f=h('input',{type:'file',accept:'.json,application/json',hidden:true,onchange:async e=>{try{await start(JSON.parse(await e.target.files[0].text()))}catch(x){toast('این فایل content.json معتبر نیست.',true)}}});
+  $('#app').replaceChildren(h('div',{style:'max-width:34rem;margin:12vh auto;padding:0 1rem;text-align:center'},h('h2',{},'پنل مدیریت'),h('p',{class:'lead',style:'margin-inline:auto'},'فایل content.json پیدا نشد. این پنل باید داخل پوشهٔ admin سایت باشد، یا فایل content.json را از پوشهٔ سایت انتخاب کنید.'),f,h('button',{class:'btn pri',type:'button',onclick:()=>f.click()},'انتخاب فایل content.json')));
+}
+addEventListener('beforeunload',e=>{if(st.c&&dirty()&&!st.busy){e.preventDefault();e.returnValue=''}});
+boot();
+
+</script>
+</body>
+</html>
