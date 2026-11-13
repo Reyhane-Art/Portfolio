@@ -31,7 +31,7 @@
   },
   "nav.contact": {
    "en": "Contact",
-   "fa": "تماس"
+   "fa": "راه های ارتباطی"
   },
   "hero.role": {
    "en": "Sculptor · Painter · Art teacher",
@@ -62,7 +62,7 @@
    "fa": "مشاهده آثار"
   },
   "hero.cta2": {
-   "en": "Get in touch",
+   "en": "Contact Me",
    "fa": "تماس با من"
   },
   "hero.fig": {
@@ -179,11 +179,11 @@
   },
   "ct.lbl": {
    "en": "Contact",
-   "fa": "تماس"
+   "fa": "راه های ارتباطی"
   },
   "ct.h": {
-   "en": "Let's talk",
-   "fa": "بیایید گفت‌وگو کنیم"
+   "en": "Contact me",
+   "fa": "تماس با من"
   },
   "ct.lead": {
    "en": "For commissions, collaborations or invitations to events, write to me through any of these.",
